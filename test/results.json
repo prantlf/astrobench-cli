@@ -1,0 +1,62 @@
+[
+  {
+    "name": "A suite",
+    "benchmarks": [
+      {
+        "name": "String#match",
+        "aborted": false,
+        "hz": 21672040.42791444,
+        "stats": {
+          "rme": 2.3315075491555657,
+          "mean": 4.61424019268606e-8
+        },
+        "sum": {
+          "ops": "20,315,409",
+          "rme": "2.35",
+          "delta": "41.18"
+        }
+      },
+      {
+        "name": "RegExp#test",
+        "aborted": false,
+        "hz": 41994328.7596832,
+        "stats": {
+          "rme": 2.073766112802081,
+          "mean": 2.3812739232542595e-8
+        },
+        "sum": {
+          "ops": "34,536,901",
+          "rme": "2.65",
+          "fastest": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "B suite",
+    "benchmarks": [
+      {
+        "name": "Benchmark with error",
+        "error": {
+          "message": "text is not defined"
+        },
+        "aborted": true
+      },
+      {
+        "name": "Deferred benchmark",
+        "aborted": false,
+        "hz": 211.47553654703322,
+        "stats": {
+          "rme": 0.9212292557297209,
+          "mean": 0.0047286793372319684
+        },
+        "sum": {
+          "ops": "223",
+          "mean": "4.5",
+          "rme": "0.92",
+          "fastest": true
+        }
+      }
+    ]
+  }
+]

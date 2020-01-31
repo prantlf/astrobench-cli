@@ -1,0 +1,78 @@
+#!/usr/bin/env node
+
+const commander = require('commander')
+const { version, description } = require('../package.json')
+const run = require('../lib/runner')
+const formatToText = require('../lib/formatters/text')
+const formatToJSON = require('../lib/formatters/json')
+
+commander
+  .version(version)
+  .description(description)
+  .usage('[options] <URL>')
+  .option('-b, --browser <name>', 'web browser to launch', 'chrome')
+  .option('-d, --directory <path>', 'root directory to serve from', '.')
+  .option('-p, --port <number>', 'port for the web server to listen to', 0, totInteger)
+  .option('-H, --no-headless', 'show the browser window during the run')
+  .option('-S, --no-sandbox', 'pass --no-sandbox to Puppeteer')
+  .option('-t, --timeout <number>', 'benchmark execution timeout [s]', 60, totInteger)
+  .option('-f, --format <type>', 'root directory to serve from', 'text')
+  .option('-C, --no-color', 'suppress color output')
+  .option('-v, --verbose', 'print progress of the tests')
+  .on('--help', () => {
+    console.log(`
+ Available browsers are "chrome" and "firefox".
+ Available formats are "text" and "json".
+
+Examples:
+
+  $ astrobench -Hv examples/index.html
+  $ astrobench -S -f json http://localhost:8080/test.html`)
+  })
+  .parse(process.argv)
+
+function totInteger (value) {
+  return parseInt(value)
+}
+
+function validate (condition, message) {
+  if (!condition) {
+    console.error(message)
+    process.exit(1)
+  }
+}
+
+const url = commander.args[0]
+if (!url) {
+  commander.help()
+}
+
+const {
+  browser, directory, port, headless, sandbox, timeout, format, color, verbose
+} = commander
+validate(['chrome', 'firefox'].includes(browser),
+  'Browser has to be either "chrome" or "firefox".')
+validate(port >= 0 && timeout <= 65535,
+  'Port timeout has to be a number greater or equal to zero.')
+validate(timeout > 0 && timeout < 86400,
+  'Benchmark timeout has to be a number of seconds greater than zero.')
+validate(['text', 'json'].includes(format),
+  'Format has to be either "text" or "json".')
+
+run({ browser, directory, port, headless, sandbox, timeout, url, color, verbose })
+  .then(printResults)
+  .catch(printError)
+
+function printResults (results) {
+  if (verbose) {
+    console.log()
+  }
+  const output = format === 'json'
+    ? formatToJSON(results) : formatToText(results, { color, verbose })
+  console.log(output)
+}
+
+function printError ({ message, stack }) {
+  console.error(verbose ? stack : message)
+  process.exitCode = 1
+}
