@@ -28,7 +28,7 @@ addTest('returns proper results', assert =>
         for (let benchIndex = 0; benchIndex < benchmarks.length; ++benchIndex) {
           const benchmark = benchmarks[benchIndex]
           assert.equal(typeof benchmark, 'object', `The benchmark ${benchIndex} is an object`)
-          const { name, error, aborted, hz, stats, sum } = benchmark
+          const { name, error, aborted, hz, stats, sum, times } = benchmark
           assert.equal(typeof name, 'string', 'A benchmark has a name')
           if (error) {
             assert.equal(aborted, true, 'A failed benchmark has been aborted')
@@ -53,6 +53,7 @@ addTest('returns proper results', assert =>
             if (!fastest) {
               assert.equal(typeof delta, 'string', 'Summary contains a delta to the fastest test')
             }
+            assert.equal(typeof times, 'object', 'A benchmark carries sample timings')
           }
         }
       }
