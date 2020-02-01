@@ -64,8 +64,8 @@ Options:
 
 Examples:
 
-  $ astrobench -vLN examples/index.html
-  $ astrobench -S -f json http://localhost:8080/test.html
+ $ astrobench -vLN examples/index.html
+ $ astrobench -OS -f json http://localhost:8080/test.html
 ```
 
 ## Programmatic Usage
