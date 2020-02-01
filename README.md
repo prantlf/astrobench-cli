@@ -20,7 +20,7 @@ npm i -g astrobench-cli
 Test the performance with a HTML page written with [@prantlf/astrobench]:
 
 ```
-user@local:.../astrobench-cli $ astrobench test/example/index.html
+$ astrobench test/example/index.html
 
 A suite
   String#match finished: 22,319,217 ops/sec ±1.28% (44.44% slower)
@@ -49,6 +49,8 @@ Options:
   -t, --timeout <number>  benchmark execution timeout [s] (default: 60)
   -f, --format <type>     root directory to serve from (default: "text")
   -C, --no-color          suppress color output
+  -L, --no-console        suppress browser console logging
+  -N, --no-network        suppress network request logging
   -v, --verbose           print progress of the tests
   -h, --help              output usage information
 

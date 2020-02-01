@@ -18,6 +18,8 @@ commander
   .option('-t, --timeout <number>', 'benchmark execution timeout [s]', 60, totInteger)
   .option('-f, --format <type>', 'root directory to serve from', 'text')
   .option('-C, --no-color', 'suppress color output')
+  .option('-L, --no-console', 'suppress browser console logging')
+  .option('-N, --no-network', 'suppress network request logging')
   .option('-v, --verbose', 'print progress of the tests')
   .on('--help', () => {
     console.log(`
@@ -47,8 +49,8 @@ if (!url) {
   commander.help()
 }
 
-const {
-  browser, directory, port, headless, sandbox, timeout, format, color, verbose
+let {
+  browser, directory, port, headless, sandbox, timeout, format, color, verbose, network, console: browserConsole
 } = commander
 validate(['chrome', 'firefox'].includes(browser),
   'Browser has to be either "chrome" or "firefox".')
@@ -58,6 +60,9 @@ validate(timeout > 0 && timeout < 86400,
   'Benchmark timeout has to be a number of seconds greater than zero.')
 validate(['text', 'json'].includes(format),
   'Format has to be either "text" or "json".')
+if (verbose) {
+  verbose = { network, browserConsole }
+}
 
 run({ browser, directory, port, headless, sandbox, timeout, url, color, verbose })
   .then(printResults)
