@@ -16,10 +16,15 @@ commander
   .option('-H, --no-headless', 'show the browser window during the run')
   .option('-S, --no-sandbox', 'pass --no-sandbox to Puppeteer')
   .option('-t, --timeout <number>', 'benchmark execution timeout [s]', 60, totInteger)
-  .option('-f, --format <type>', 'root directory to serve from', 'text')
+  .option('-f, --format <type>', 'printed results format', 'text')
+  .option('-e, --save-text <file>', 'save results as text')
+  .option('-j, --save-json <file>', 'save results as JSON')
+  .option('-i, --save-image <file>', 'save PNG screenshot of the page')
+  .option('-m, --save-html <file>', 'save HTML markup of the page')
   .option('-C, --no-color', 'suppress color output')
   .option('-L, --no-console', 'suppress browser console logging')
   .option('-N, --no-network', 'suppress network request logging')
+  .option('-q, --quiet', 'do not print the test results')
   .option('-v, --verbose', 'print progress of the tests')
   .on('--help', () => {
     console.log(`
@@ -28,7 +33,7 @@ commander
 
 Examples:
 
-  $ astrobench -Hv examples/index.html
+  $ astrobench -vLN examples/index.html
   $ astrobench -S -f json http://localhost:8080/test.html`)
   })
   .parse(process.argv)
@@ -50,12 +55,12 @@ if (!url) {
 }
 
 let {
-  browser, directory, port, headless, sandbox, timeout, format, color, verbose, network, console: browserConsole
+  browser, directory, port, headless, sandbox, timeout, format, color, quiet, verbose, network, console: browserConsole, saveText, saveJson, saveImage, saveHtml
 } = commander
 validate(['chrome', 'firefox'].includes(browser),
   'Browser has to be either "chrome" or "firefox".')
-validate(port >= 0 && timeout <= 65535,
-  'Port timeout has to be a number greater or equal to zero.')
+validate(port >= 0 && port <= 65535,
+  'Port has to be a number greater or equal to zero.')
 validate(timeout > 0 && timeout < 86400,
   'Benchmark timeout has to be a number of seconds greater than zero.')
 validate(['text', 'json'].includes(format),
@@ -64,7 +69,7 @@ if (verbose) {
   verbose = { network, browserConsole }
 }
 
-run({ browser, directory, port, headless, sandbox, timeout, url, color, verbose })
+run({ browser, directory, port, headless, sandbox, timeout, url, color, verbose, saveText, saveJson, saveImage, saveHtml })
   .then(printResults)
   .catch(printError)
 
@@ -72,9 +77,11 @@ function printResults (results) {
   if (verbose) {
     console.log()
   }
-  const output = format === 'json'
-    ? formatToJSON(results) : formatToText(results, { color, verbose })
-  console.log(output)
+  if (!quiet) {
+    const output = format === 'json'
+      ? formatToJSON(results) : formatToText(results, { color, verbose })
+    console.log(output)
+  }
 }
 
 function printError ({ message, stack }) {

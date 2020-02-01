@@ -40,26 +40,31 @@ $ astrobench --help
 Usage: astrobench [options] <URL>
 
 Options:
-  -V, --version           output the version number
-  -b, --browser <name>    web browser to launch (default: "chrome")
-  -d, --directory <path>  root directory to serve from (default: ".")
-  -p, --port <number>     port for the web server to listen to (default: 0)
-  -H, --no-headless       show the browser window during the run
-  -S, --no-sandbox        pass --no-sandbox to Puppeteer
-  -t, --timeout <number>  benchmark execution timeout [s] (default: 60)
-  -f, --format <type>     root directory to serve from (default: "text")
-  -C, --no-color          suppress color output
-  -L, --no-console        suppress browser console logging
-  -N, --no-network        suppress network request logging
-  -v, --verbose           print progress of the tests
-  -h, --help              output usage information
+  -V, --version            output the version number
+  -b, --browser <name>     web browser to launch (default: "chrome")
+  -d, --directory <path>   root directory to serve from (default: ".")
+  -p, --port <number>      port for the web server to listen to (default: 0)
+  -H, --no-headless        show the browser window during the run
+  -S, --no-sandbox         pass --no-sandbox to Puppeteer
+  -t, --timeout <number>   benchmark execution timeout [s] (default: 60)
+  -f, --format <type>      printed results format (default: "text")
+  -e, --save-text <file>   save results as text
+  -j, --save-json <file>   save results as JSON
+  -i, --save-image <file>  save PNG screenshot of the page
+  -m, --save-html <file>   save HTML markup of the page
+  -C, --no-color           suppress color output
+  -L, --no-console         suppress browser console logging
+  -N, --no-network         suppress network request logging
+  -q, --quiet              do not print the test results
+  -v, --verbose            print progress of the tests
+  -h, --help               output usage information
 
  Available browsers are "chrome" and "firefox".
  Available formats are "text" and "json".
 
 Examples:
 
-  $ astrobench -Hv examples/index.html
+  $ astrobench -vLN examples/index.html
   $ astrobench -S -f json http://localhost:8080/test.html
 ```
 

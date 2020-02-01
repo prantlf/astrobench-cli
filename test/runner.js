@@ -1,6 +1,7 @@
 /* global it */
 
 const run = require('../lib/runner')
+const { join } = require('path')
 
 function addTest (description, test) {
   if (typeof describe === 'function') {
@@ -16,7 +17,14 @@ addTest('is the main export', assert => {
 })
 
 addTest('returns proper results', assert =>
-  run({ url: 'test/example/index.html' })
+  run({
+    url: 'test/example/index.html',
+    quiet: true,
+    saveText: join(__dirname, '/output/results.txt'),
+    saveJson: join(__dirname, '/output/results.json'),
+    saveImage: join(__dirname, '/output/results.png'),
+    saveHtml: join(__dirname, '/output/results.html')
+  })
     .then(suites => {
       assert.ok(Array.isArray(suites), 'Results is an array of suites')
       for (let suiteIndex = 0; suiteIndex < suites.length; ++suiteIndex) {
