@@ -11,7 +11,7 @@ Runs benchmarks on web pages written with [@prantlf/astrobench] from the command
 
 ## Getting Started
 
-Make sure that you have [NodeJS] >= 8 installed. Install `astrobench-cli` globally:
+Make sure that you have [Node.js] >= 8 installed. Install `astrobench-cli` globally:
 
 ```
 npm i -g astrobench-cli
@@ -88,7 +88,7 @@ Examples:
 
 ## Programmatic Usage
 
-Make sure that you have [NodeJS] >= 8 installed. Install `astrobench-cli` locally in your project  with [npm] or [yarn]:
+Make sure that you have [Node.js] >= 8 installed. Install `astrobench-cli` locally in your project  with [npm] or [yarn]:
 
 ```
 npm i astrobench-cli
@@ -216,7 +216,7 @@ Licensed under the MIT license.
 [@prantlf/astrobench]: http://prantlf.github.com/astrobench/
 [benchmark.js]: https://benchmarkjs.com/
 [Puppeteer]: https://pptr.dev/
-[NodeJS]: http://nodejs.org/
+[Node.js]: http://nodejs.org/
 [npm]: https://www.npmjs.org/
 [yarn]: https://yarnpkg.com/
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
