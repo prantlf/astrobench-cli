@@ -171,7 +171,8 @@ The `verbose` output can be enabled either by `true` or by an object with follow
       }
     ]
   }
-]```
+]
+```
 
 ### format(suites: array, options: object): string
 
