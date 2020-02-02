@@ -30,6 +30,24 @@ B suite
   Deferred benchmark finished: 206 ops/sec 4.9ms ±0.42% (fastest)
 ```
 
+### Synopsis of A Testing Page
+
+```html
+<link rel="stylesheet"
+      href="https://unpkg.com/@prantlf/astrobench@1.1.0/dist/astrobench.min.css">
+<script src="https://unpkg.com/@prantlf/astrobench@1.1.0/dist/astrobench.min.js"></script>
+
+<div id="astrobench"></div>
+
+<script>
+  suite('A suite', suite => {
+    const text = 'Hello world'
+    bench('Validate greeting by regular expression', () => text.match(/^H/))
+    bench('Validate greeting by comparison', () => text[0] === 'H')
+  })
+</script>
+```
+
 ## Command-Line Usage
 
 The `astrobench` script prints results formatted as it is typical for the results of tests written with [benchmark.js]. If running the benchmarks fails, exit code 1 will be returned to the caller.
