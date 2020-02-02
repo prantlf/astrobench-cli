@@ -19,7 +19,7 @@ addTest('is the main export', assert => {
 addTest('returns proper results', assert =>
   run({
     url: 'test/example/index.html',
-    quiet: true,
+    verbose: true,
     saveText: join(__dirname, '/output/results.txt'),
     saveJson: join(__dirname, '/output/results.json'),
     saveImage: join(__dirname, '/output/results.png'),
