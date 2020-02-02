@@ -182,12 +182,7 @@ An example of the test results. Benchmark properties `aborted`, `error`, `hz`, `
           "message": "text is not defined",
           "name": "ReferenceError",
           "stack": "@test/example/bench.js:19:6
-            Benchmark.uid1580598679888createFunction@test/example/index.html:3:124
-            clock@node_modules/@prantlf/astrobench/dist/astrobench.js:1646:13
-            cycle@node_modules/@prantlf/astrobench/dist/astrobench.js:2009:49
-            run@node_modules/@prantlf/astrobench/dist/astrobench.js:2116:13
-            execute@node_modules/@prantlf/astrobench/dist/astrobench.js:862:62
-            baseDelay/<@node_modules/@prantlf/astrobench/dist/astrobench.js:6645:38"
+            Benchmark.uid1580598679888createFunction@test/example/index.html:3:124"
         },
         "aborted": true
       }
