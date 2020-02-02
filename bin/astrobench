@@ -24,6 +24,7 @@ commander
   .option('-C, --no-color', 'suppress color output')
   .option('-L, --no-console', 'suppress browser console logging')
   .option('-N, --no-network', 'suppress network request logging')
+  .option('-P, --no-progress', 'suppress detailed progress logging')
   .option('-q, --quiet', 'do not print the test results')
   .option('-v, --verbose', 'print progress of the tests')
   .on('--help', () => {
@@ -55,7 +56,7 @@ if (!url) {
 }
 
 let {
-  browser, directory, port, headless, sandbox, timeout, format, color, quiet, verbose, network, console: browserConsole, saveText, saveJson, saveImage, saveHtml
+  browser, directory, port, headless, sandbox, timeout, format, color, quiet, verbose, network, console: browserConsole, progress, saveText, saveJson, saveImage, saveHtml
 } = commander
 validate(['chrome', 'firefox'].includes(browser),
   'Browser has to be either "chrome" or "firefox".')
@@ -66,7 +67,7 @@ validate(timeout > 0 && timeout < 86400,
 validate(['text', 'json'].includes(format),
   'Format has to be either "text" or "json".')
 if (verbose) {
-  verbose = { network, browserConsole }
+  verbose = { network, browserConsole, progress }
 }
 
 run({ browser, directory, port, headless, sandbox, timeout, url, color, verbose, saveText, saveJson, saveImage, saveHtml })

@@ -73,6 +73,7 @@ Options:
   -C, --no-color           suppress color output
   -L, --no-console         suppress browser console logging
   -N, --no-network         suppress network request logging
+  -P, --no-progress        suppress detailed progress logging
   -q, --quiet              do not print the test results
   -v, --verbose            print progress of the tests
   -h, --help               output usage information
@@ -129,6 +130,7 @@ The `verbose` output on the console can be enabled either by `true` or by an obj
 
 * `console: boolean` - can suppress browser console logging (default: `true`)
 * `network: boolean` - can suppress network request logging (default: `true`)
+* `progress: boolean` - can suppress detailed progress logging (default: `true`)
 
 An example of the test results. Benchmark properties `aborted`, `error`, `hz`, `stats` and `times` are described in the [Benchmark.js documentation]:
 
