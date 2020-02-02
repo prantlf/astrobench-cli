@@ -107,10 +107,12 @@ The main module exports a function which runs a web page with benchmarks and ret
 
 Available browsers are `'chrome'` and `'firefox'`. Available formats are `'text'` and `'json'`.
 
-The `verbose` output can be enabled either by `true` or by an object with following properties, which can suppress some output:
+The `verbose` output on the console can be enabled either by `true` or by an object with following properties, which can suppress some output:
 
 * `console: boolean` - can suppress browser console logging (default: `true`)
 * `network: boolean` - can suppress network request logging (default: `true`)
+
+An example of the test results. Benchmark properties `aborted`, `error`, `hz`, `stats` and `times` are described in the [Benchmark.js documentation]:
 
 ```json
 [
@@ -200,3 +202,4 @@ Licensed under the MIT license.
 [npm]: https://www.npmjs.org/
 [yarn]: https://yarnpkg.com/
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[Benchmark.js documentation]: https://benchmarkjs.com/docs
