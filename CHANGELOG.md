@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/prantlf/astrobench-cli/compare/v1.1.0...v1.2.0) (2020-02-02)
+
+### Features
+
+* Trim the origin of the local web server from error stack traces ([2fa5aae](https://github.com/prantlf/astrobench-cli/commit/2fa5aae4801f934d77c0e04b675f3283c775fc1e))
+
+
 ## [1.1.0](https://github.com/prantlf/astrobench-cli/compare/v1.0.2...v1.1.0) (2020-02-02)
 
 ### Features
