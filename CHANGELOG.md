@@ -1,9 +1,15 @@
+## [1.3.0](https://github.com/prantlf/astrobench-cli/compare/v1.2.0...v1.3.0) (2020-02-02)
+
+### Features
+
+* Allow suppression of the default progress logging ([7823dc7](https://github.com/prantlf/astrobench-cli/commit/7823dc78e43e7126439e3fe57a21099bfeeae96f))
+* Exclude stack frames from npm dependencies from mode_modules ([a396492](https://github.com/prantlf/astrobench-cli/commit/a3964927999214a64ca193e0a38903c6b2131b29))
+
 ## [1.2.0](https://github.com/prantlf/astrobench-cli/compare/v1.1.0...v1.2.0) (2020-02-02)
 
 ### Features
 
 * Trim the origin of the local web server from error stack traces ([2fa5aae](https://github.com/prantlf/astrobench-cli/commit/2fa5aae4801f934d77c0e04b675f3283c775fc1e))
-
 
 ## [1.1.0](https://github.com/prantlf/astrobench-cli/compare/v1.0.2...v1.1.0) (2020-02-02)
 
