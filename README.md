@@ -88,13 +88,97 @@ console.log(format(results))
 
 ### run(options: object): Promise
 
-The main module exports a function which runs a web page with benchmarks. Supported properties in the `options` parameter correspond with the command-line argument names in the [shell-script source].
+The main module exports a function which runs a web page with benchmarks and returns a [Promise] to an array of objects with results of benchmark suites. Recognised options:
 
-The function returns a [Promise] to an array of objects with results of benchmark suites.
+* `browser: string` - web browser to launch (default: `'chrome'`)
+* `directory: string` - root directory to serve from (default: `'.'`)
+* `port: string` - port for the web server to listen to (default: `0`)
+* `headless: boolean` - can show the browser window during the run (default: `true`)
+* `sandbox: boolean` - pass --no-sandbox to Puppeteer (default: `false`)
+* `timeout: string` - benchmark execution timeout [s] (default: `60`)
+* `format: string` - printed results format (default: `'text'`)
+* `saveText: string` - save results as text to the specified file path
+* `saveJson: string` - save results as JSON to the specified file path
+* `saveImage: string` - save PNG screenshot of the page to the specified file path
+* `saveHtml: string` - save HTML markup of the page to the specified file path
+* `color: boolean` - can suppress color output (default: `true`)
+* `quiet: boolean` - can suppress printing the test results (default: `false`)
+* `verbose: boolean|object` - print progress of the tests (default: `false`)
+
+Available browsers are `'chrome'` and `'firefox'`. Available formats are `'text'` and `'json'`.
+
+The `verbose` output can be enabled either by `true` or by an object with following properties, which can suppress some output:
+
+* `console: boolean` - can suppress browser console logging (default: `true`)
+* `network: boolean` - can suppress network request logging (default: `true`)
+
+```json
+[
+  {
+    "name": "A suite",
+    "benchmarks": [
+      {
+        "name": "String#match",
+        "aborted": false,
+        "hz": 21672040.42791444,
+        "stats": {
+          "moe": 5.954327080006653e-10,
+          "rme": 1.394724557215958,
+          "sem": 3.0379219795952314e-10,
+          "deviation": 2.411275818127806e-9,
+          "mean": 4.2691777736331135e-8,
+          "sample": [
+            4.124457928386555e-8,
+            ...
+          ],
+          "variance": 5.8142510710879216e-18
+        },
+        "times": {
+          "cycle": 0.08077886301779932,
+          "elapsed": 6.148,
+          "period": 4.2691777736331135e-8,
+          "timeStamp": 1580598679963
+        },
+        "sum": {
+          "ops": "20,315,409",
+          "rme": "2.35",
+          "delta": "41.18"
+        }
+      },
+      {
+        "name": "RegExp#test",
+        ...,
+        "sum": {
+          "ops": "34,536,901",
+          "rme": "2.65",
+          "fastest": true
+        }
+      },
+      {
+        "name": "Benchmark with error",
+        "error": {
+          "message": "text is not defined",
+          "name": "ReferenceError",
+          "stack": "@test/example/bench.js:19:6
+            Benchmark.uid1580598679888createFunction@test/example/index.html:3:124
+            clock@node_modules/@prantlf/astrobench/dist/astrobench.js:1646:13
+            cycle@node_modules/@prantlf/astrobench/dist/astrobench.js:2009:49
+            run@node_modules/@prantlf/astrobench/dist/astrobench.js:2116:13
+            execute@node_modules/@prantlf/astrobench/dist/astrobench.js:862:62
+            baseDelay/<@node_modules/@prantlf/astrobench/dist/astrobench.js:6645:38"
+        },
+        "aborted": true
+      }
+    ]
+  }
+]```
 
 ### format(suites: array, options: object): string
 
-Modules `astrobench-cli/lib/formatters/text` and `astrobench-cli/lib/formatters/json` export a function which formats benchmark results to a string. Either to a readable text suitable for printing on the console, or to a JSON text for passing further to machine-processing tools.
+Modules `astrobench-cli/lib/formatters/text` and `astrobench-cli/lib/formatters/json` export a function which formats benchmark results to a string. Either to a readable text suitable for printing on the console, or to a JSON text for passing further to machine-processing tools. Recognised options:
+
+* `color: boolean` - can disable color output, if the formatter supports it (default: `true`)
+* `verbose: boolean` - add stack trace to failed benchmarks (default: `false`)
 
 ## Contributing
 
@@ -114,5 +198,4 @@ Licensed under the MIT license.
 [NodeJS]: http://nodejs.org/
 [npm]: https://www.npmjs.org/
 [yarn]: https://yarnpkg.com/
-[shell-script source]: bin/astrobench
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
