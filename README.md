@@ -9,6 +9,8 @@
 
 Runs benchmarks on web pages written with [@prantlf/astrobench] from the command line using [Puppeteer].
 
+![astrobench-example.gif](doc/astrobench-example.gif)
+
 ## Getting Started
 
 Make sure that you have [Node.js] >= 8 installed. Install `astrobench-cli` globally:

@@ -1,0 +1,212 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: bash -l
+  
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /Users/ferdipr/Sources.localized/github/astrobench-cli
+  
+  # Export additional ENV variables
+  env:
+    recording: true
+  
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 70
+  
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 17
+  
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+  
+  # Quality
+  # 1 - 100
+  quality: 100
+  
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+  
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 1000
+  
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: null
+    title: astrobench-example
+    style:
+      backgroundColor: black
+      border: 4px black solid
+      boxShadow: none
+      margin: 0px
+  
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+  
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+  
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Menlo, Monaco, Ubuntu Mono, Lucida Console, Monospace"
+  
+  # The size of the font
+  fontSize: 12
+  
+  # The height of lines
+  lineHeight: 1
+  
+  # The spacing between letters
+  letterSpacing: 0
+  
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+  
+# Records, feel free to edit them
+records:
+  - delay: 200
+    content: 'ferdipr@macik: '
+#  - delay: 896
+#    content: astrobench -vLNP test/example/index.html
+  - delay: 20
+    content: a
+  - delay: 20
+    content: s
+  - delay: 20
+    content: t
+  - delay: 20
+    content: r
+  - delay: 20
+    content: o
+  - delay: 20
+    content: b
+  - delay: 20
+    content: e
+  - delay: 20
+    content: n
+  - delay: 20
+    content: c
+  - delay: 20
+    content: h
+  - delay: 20
+    content: " "
+  - delay: 20
+    content: "-"
+  - delay: 20
+    content: v
+  - delay: 20
+    content: L
+  - delay: 20
+    content: N
+  - delay: 20
+    content: P
+  - delay: 20
+    content: " "
+  - delay: 20
+    content: t
+  - delay: 20
+    content: e
+  - delay: 20
+    content: s
+  - delay: 20
+    content: t
+  - delay: 20
+    content: /
+  - delay: 20
+    content: e
+  - delay: 20
+    content: x
+  - delay: 20
+    content: a
+  - delay: 20
+    content: m
+  - delay: 20
+    content: p
+  - delay: 20
+    content: l
+  - delay: 20
+    content: e
+  - delay: 20
+    content: /
+  - delay: 20
+    content: i
+  - delay: 20
+    content: n
+  - delay: 20
+    content: d
+  - delay: 20
+    content: e
+  - delay: 20
+    content: x
+  - delay: 20
+    content: .
+  - delay: 20
+    content: h
+  - delay: 20
+    content: t
+  - delay: 20
+    content: m
+  - delay: 20
+    content: l
+  - delay: 639
+    content: "\r\n"
+  - delay: 1160
+    content: "--- Suite \e[33mA suite\e[39m\r\n---   Benchmark \e[36mString#match\e[39m\r\n"
+  - delay: 6282
+    content: "---   Benchmark \e[36mRegExp#test\e[39m\r\n"
+  - delay: 6130
+    content: "--- Suite \e[33mB suite\e[39m\r\n---   Benchmark \e[36mBenchmark with error\e[39m\r\n"
+  - delay: 12
+    content: "---   Benchmark \e[36mDeferred benchmark\e[39m\r\n"
+  - delay: 6035
+    content: "\r\n\e[33mA suite\e[39m\r\n\e[33m\e[36m  String#match finished: 21,119,658 ops/sec ±1.88% (42.96% slower)\e[39m\e[33m\e[39m\r\n\e[33m\e[32m  RegExp#test finished: 37,024,661 ops/sec ±2.32% (fastest)\e[39m\e[33m\e[39m\r\n\e[33mB suite\e[39m\r\n\e[33m\e[31m  Benchmark with error failed: ReferenceError: text is not defined\e[39m\e[33m\e[39m\r\n\e[33m\e[31m    at Benchmark.<anonymous> (test/example/bench.js:19:5)\e[39m\e[33m\e[39m\r\n\e[33m\e[31m    at Benchmark.uid1580647121493createFunction (<anonymous>:3:142)\e[39m\e[33m\e[39m\r\n\e[33m\e[32m  Deferred benchmark finished: 210 ops/sec 4.8ms ±0.82% (fastest)\e[39m\e[33m\e[39m\r\n"
+  - delay: 1000
+    content: " "
