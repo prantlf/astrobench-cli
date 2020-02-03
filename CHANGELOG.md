@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/prantlf/astrobench-cli/compare/v1.3.0...v1.3.1) (2020-02-03)
+
+### Bug Fixes
+
+* Print deviation even if comparison of benchmarks was disabled ([beb18e6](https://github.com/prantlf/astrobench-cli/commit/beb18e6f51d78e632aa237601857bd6fa74c9ccc))
+* Upgrade npm dependencies ([efff519](https://github.com/prantlf/astrobench-cli/commit/efff5199b1cac67072fd0f9ffed60f0221e985d1))
+
 ## [1.3.0](https://github.com/prantlf/astrobench-cli/compare/v1.2.0...v1.3.0) (2020-02-02)
 
 ### Features
