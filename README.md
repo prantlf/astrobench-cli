@@ -9,7 +9,7 @@
 
 Runs benchmarks on web pages written with [@prantlf/astrobench] from the command line using [Puppeteer].
 
-![astrobench-example.gif](doc/astrobench-example.gif)
+![astrobench-cli usage screencast](doc/astrobench-example.gif)
 
 ## Getting Started
 

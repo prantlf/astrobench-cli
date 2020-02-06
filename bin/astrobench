@@ -35,7 +35,7 @@ commander
 Examples:
 
  $ astrobench -vLN examples/index.html
- $ astrobench -OS -f json http://localhost:8080/test.html`)
+ $ astrobench -CS -f json http://localhost:8080/test.html`)
   })
   .parse(process.argv)
 
