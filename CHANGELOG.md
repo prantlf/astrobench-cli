@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/prantlf/astrobench-cli/compare/v1.3.1...v1.3.2) (2020-02-06)
+
+### Bug Fixes
+
+* Use Chrome as a default browser on the API level too ([34c9e94](https://github.com/prantlf/astrobench-cli/commit/34c9e947664733984eaa2eac6932daa24f3f9db5))
+* Upgrade npm dependencies ([12a95c9](https://github.com/prantlf/astrobench-cli/commit/12a95c9b682a1bfd3da703087b478014996e121f))
+
 ## [1.3.1](https://github.com/prantlf/astrobench-cli/compare/v1.3.0...v1.3.1) (2020-02-03)
 
 ### Bug Fixes
