@@ -1,3 +1,9 @@
+## [1.4.1](https://github.com/prantlf/astrobench-cli/compare/v1.4.0...v1.4.1) (2020-02-07)
+
+### Bug Fixes
+
+* Correct type of shm and sandbox parameterds ([12ee5b2](https://github.com/prantlf/astrobench-cli/commit/12ee5b296b036e858bdc5439cd69e3e84f33d7bc))
+
 ## [1.4.0](https://github.com/prantlf/astrobench-cli/compare/v1.3.3...v1.4.0) (2020-02-07)
 
 ### Features
