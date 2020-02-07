@@ -1,3 +1,15 @@
+## [1.4.0](https://github.com/prantlf/astrobench-cli/compare/v1.3.3...v1.4.0) (2020-02-07)
+
+### Features
+
+* Allow specifying the browser executable path and disabling /dev/shm ([2a31f8b](https://github.com/prantlf/astrobench-cli/commit/2a31f8b87a638ee33b256a1fc0a577cf03097579))
+
+## [1.3.3](https://github.com/prantlf/astrobench-cli/compare/v1.3.2...v1.3.3) (2020-02-07)
+
+### Bug Fixes
+
+* Move puppeteer-firefox to peer dependencies, as long as it does not support all platforms ([fcd9304](https://github.com/prantlf/astrobench-cli/commit/fcd9304bdd7e74b878165b9eb63071c5439bc7b7))
+
 ## [1.3.2](https://github.com/prantlf/astrobench-cli/compare/v1.3.1...v1.3.2) (2020-02-06)
 
 ### Bug Fixes
