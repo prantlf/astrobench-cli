@@ -65,7 +65,9 @@ Options:
   -d, --directory <path>   root directory to serve from (default: ".")
   -p, --port <number>      port for the web server to listen to (default: 0)
   -H, --no-headless        show the browser window during the run
-  -S, --no-sandbox         pass --no-sandbox to Puppeteer
+  -S, --no-sandbox         pass `--no-sandbox` to Puppeteer
+  -M, --no-shm             pass `--disable-dev-shm-usage` to Puppeteer
+  -x, --executable <path>  set the path to the browser executable
   -t, --timeout <number>   benchmark execution timeout [s] (default: 60)
   -f, --format <type>      printed results format (default: "text")
   -e, --save-text <file>   save results as text
@@ -115,7 +117,9 @@ The main module exports a function which runs a web page with benchmarks and ret
 * `directory: string` - root directory to serve from (default: `'.'`)
 * `port: string` - port for the web server to listen to (default: `0`)
 * `headless: boolean` - can show the browser window during the run (default: `true`)
-* `sandbox: boolean` - pass --no-sandbox to Puppeteer (default: `false`)
+* `sandbox: boolean` - pass `--no-sandbox` to Puppeteer (default: `false`)
+* `shm: boolean` - pass `--disable-dev-shm-usage` to Puppeteer (default: `false`)
+* `executable: string` - set the path to the browser executable
 * `timeout: string` - benchmark execution timeout [s] (default: `60`)
 * `format: string` - printed results format (default: `'text'`)
 * `saveText: string` - save results as text to the specified file path
