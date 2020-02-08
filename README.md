@@ -74,6 +74,7 @@ Options:
   -j, --save-json <file>       save results as JSON
   -i, --save-image <file>      save PNG screenshot of the page
   -m, --save-html <file>       save HTML markup of the page
+  -l, --save-log <file>        save a dump of the console
   -r, --error-snapshot <path>  save LOG, HTML and PNG snapshots on failure
   -C, --no-color               suppress color output
   -L, --no-console             suppress browser console logging
@@ -127,6 +128,7 @@ The main module exports a function which runs a web page with benchmarks and ret
 * `saveJson: string` - save results as JSON to the specified file path
 * `saveImage: string` - save PNG screenshot of the page to the specified file path
 * `saveHtml: string` - save HTML markup of the page to the specified file path
+* `saveLog: string` - save a dump of the console to the specified file path
 * `errorSnapshot: string` - save LOG, HTML and PNG snapshots on failure to the specified file path prefix; file extensions `.log`, `.png` and `.html` will be appended automatically
 * `color: boolean` - can suppress color output (default: `true`)
 * `quiet: boolean` - can suppress printing the test results (default: `false`)

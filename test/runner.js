@@ -25,6 +25,7 @@ addTest('is the main export', assert => {
 })
 
 addTest('returns proper results', async assert => {
+  await remove(join(__dirname, '/output/results.log'))
   await remove(join(__dirname, '/output/results.txt'))
   await remove(join(__dirname, '/output/results.json'))
   await remove(join(__dirname, '/output/results.png'))
@@ -32,6 +33,7 @@ addTest('returns proper results', async assert => {
   return run({
     url: 'test/example/index.html',
     verbose: true,
+    saveLog: join(__dirname, '/output/results.log'),
     saveText: join(__dirname, '/output/results.txt'),
     saveJson: join(__dirname, '/output/results.json'),
     saveImage: join(__dirname, '/output/results.png'),
@@ -77,6 +79,7 @@ addTest('returns proper results', async assert => {
           }
         }
       }
+      await checkFile(join(__dirname, '/output/results.log'))
       await checkFile(join(__dirname, '/output/results.txt'))
       await checkFile(join(__dirname, '/output/results.json'))
       await checkFile(join(__dirname, '/output/results.png'))
@@ -91,6 +94,7 @@ addTest('takes error snapshots', async assert => {
   await remove(join(__dirname, '/output/error.html'))
   return run({
     url: 'test/example/missing.html',
+    verbose: true,
     errorSnapshot: join(__dirname, '/output/error'),
     timeout: 5
   })

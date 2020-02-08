@@ -23,6 +23,7 @@ commander
   .option('-j, --save-json <file>', 'save results as JSON')
   .option('-i, --save-image <file>', 'save PNG screenshot of the page')
   .option('-m, --save-html <file>', 'save HTML markup of the page')
+  .option('-l, --save-log <file>', 'save a dump of the console')
   .option('-r, --error-snapshot <path>', 'save LOG, HTML and PNG snapshots on failure')
   .option('-C, --no-color', 'suppress color output')
   .option('-L, --no-console', 'suppress browser console logging')
@@ -78,6 +79,7 @@ let {
   saveJson,
   saveImage,
   saveHtml,
+  saveLog,
   errorSnapshot
 } = commander
 validate(['chrome', 'firefox'].includes(browser),
@@ -108,6 +110,7 @@ run({
   saveJson,
   saveImage,
   saveHtml,
+  saveLog,
   errorSnapshot
 })
   .then(printResults)

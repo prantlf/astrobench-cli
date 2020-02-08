@@ -43,6 +43,10 @@
         "aborted": true
       },
       {
+        "name": "Aborted benchmark",
+        "aborted": true
+      },
+      {
         "name": "Deferred benchmark",
         "aborted": false,
         "hz": 211.47553654703322,

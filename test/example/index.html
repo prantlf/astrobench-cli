@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>@prantlf/astrobench</title>
+	<link rel="preload" href="missing.css" as="style"><!-- test error output -->
 	<link rel="stylesheet" href="../../node_modules/@prantlf/astrobench/dist/astrobench.css">
 </head>
 <body>
@@ -10,5 +11,9 @@
 
 	<script src="../../node_modules/@prantlf/astrobench/dist/astrobench.js"></script>
 	<script src="bench.js"></script>
+
+	<script>
+		console.log('Page was loaded.') // test console output
+	</script>
 </body>
 </html>

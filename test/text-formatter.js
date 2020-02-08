@@ -18,6 +18,7 @@ addTest('text formatter', assert => {
   RegExp#test finished: [.,0-9]+ ops\\/sec ±[.,0-9]+% \\(fastest\\)
 B suite
   Benchmark with error failed: text is not defined
+  Aborted benchmark aborted
   Deferred benchmark finished: [.,0-9]+ ops/sec [.,0-9]+ms ±[.,0-9]+% \\(fastest\\)`)
   assert.ok(pattern.test(output), 'Formatted text matches the expected one')
 })
