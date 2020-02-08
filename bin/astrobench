@@ -12,7 +12,7 @@ commander
   .usage('[options] <URL>')
   .option('-b, --browser <name>', 'web browser to launch', 'chrome')
   .option('-d, --directory <path>', 'root directory to serve from', '.')
-  .option('-p, --port <number>', 'port for the web server to listen to', 0, totInteger)
+  .option('-p, --port <number>', 'port for the server to listen to', 0, totInteger)
   .option('-H, --no-headless', 'show the browser window during the run')
   .option('-S, --no-sandbox', 'pass --no-sandbox to Puppeteer')
   .option('-M, --no-shm', 'pass --disable-dev-shm-usage to Puppeteer')
@@ -23,6 +23,7 @@ commander
   .option('-j, --save-json <file>', 'save results as JSON')
   .option('-i, --save-image <file>', 'save PNG screenshot of the page')
   .option('-m, --save-html <file>', 'save HTML markup of the page')
+  .option('-r, --error-snapshot <path>', 'save LOG, HTML and PNG snapshots on failure')
   .option('-C, --no-color', 'suppress color output')
   .option('-L, --no-console', 'suppress browser console logging')
   .option('-N, --no-network', 'suppress network request logging')
@@ -58,7 +59,26 @@ if (!url) {
 }
 
 let {
-  browser, directory, port, headless, sandbox, shm, executable, timeout, format, color, quiet, verbose, network, console: browserConsole, progress, saveText, saveJson, saveImage, saveHtml
+  browser,
+  directory,
+  port,
+  headless,
+  sandbox,
+  shm,
+  executable,
+  timeout,
+  format,
+  color,
+  quiet,
+  verbose,
+  network,
+  console: browserConsole,
+  progress,
+  saveText,
+  saveJson,
+  saveImage,
+  saveHtml,
+  errorSnapshot
 } = commander
 validate(['chrome', 'firefox'].includes(browser),
   'Browser has to be either "chrome" or "firefox".')
@@ -72,7 +92,24 @@ if (verbose) {
   verbose = { network, browserConsole, progress }
 }
 
-run({ browser, directory, port, headless, sandbox, shm, executable, timeout, url, color, verbose, saveText, saveJson, saveImage, saveHtml })
+run({
+  url,
+  browser,
+  directory,
+  port,
+  headless,
+  sandbox,
+  shm,
+  executable,
+  timeout,
+  color,
+  verbose,
+  saveText,
+  saveJson,
+  saveImage,
+  saveHtml,
+  errorSnapshot
+})
   .then(printResults)
   .catch(printError)
 

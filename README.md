@@ -60,27 +60,28 @@ $ astrobench --help
 Usage: astrobench [options] <URL>
 
 Options:
-  -V, --version            output the version number
-  -b, --browser <name>     web browser to launch (default: "chrome")
-  -d, --directory <path>   root directory to serve from (default: ".")
-  -p, --port <number>      port for the web server to listen to (default: 0)
-  -H, --no-headless        show the browser window during the run
-  -S, --no-sandbox         pass `--no-sandbox` to Puppeteer
-  -M, --no-shm             pass `--disable-dev-shm-usage` to Puppeteer
-  -x, --executable <path>  set the path to the browser executable
-  -t, --timeout <number>   benchmark execution timeout [s] (default: 60)
-  -f, --format <type>      printed results format (default: "text")
-  -e, --save-text <file>   save results as text
-  -j, --save-json <file>   save results as JSON
-  -i, --save-image <file>  save PNG screenshot of the page
-  -m, --save-html <file>   save HTML markup of the page
-  -C, --no-color           suppress color output
-  -L, --no-console         suppress browser console logging
-  -N, --no-network         suppress network request logging
-  -P, --no-progress        suppress detailed progress logging
-  -q, --quiet              do not print the test results
-  -v, --verbose            print progress of the tests
-  -h, --help               output usage information
+  -V, --version                output the version number
+  -b, --browser <name>         web browser to launch (default: "chrome")
+  -d, --directory <path>       root directory to serve from (default: ".")
+  -p, --port <number>          port for the server to listen to (default: 0)
+  -H, --no-headless            show the browser window during the run
+  -S, --no-sandbox             pass `--no-sandbox` to Puppeteer
+  -M, --no-shm                 pass `--disable-dev-shm-usage` to Puppeteer
+  -e, --executable             set the path to the browser executable
+  -t, --timeout <number>       benchmark execution timeout [s] (default: 60)
+  -f, --format <type>          printed results format (default: "text")
+  -e, --save-text <file>       save results as text
+  -j, --save-json <file>       save results as JSON
+  -i, --save-image <file>      save PNG screenshot of the page
+  -m, --save-html <file>       save HTML markup of the page
+  -r, --error-snapshot <path>  save LOG, HTML and PNG snapshots on failure
+  -C, --no-color               suppress color output
+  -L, --no-console             suppress browser console logging
+  -N, --no-network             suppress network request logging
+  -P, --no-progress            suppress detailed progress logging
+  -q, --quiet                  do not print the test results
+  -v, --verbose                print progress of the tests
+  -h, --help                   output usage information
 
  Available browsers are "chrome" and "firefox".
  Available formats are "text" and "json".
@@ -126,6 +127,7 @@ The main module exports a function which runs a web page with benchmarks and ret
 * `saveJson: string` - save results as JSON to the specified file path
 * `saveImage: string` - save PNG screenshot of the page to the specified file path
 * `saveHtml: string` - save HTML markup of the page to the specified file path
+* `errorSnapshot: string` - save LOG, HTML and PNG snapshots on failure to the specified file path prefix; file extensions `.log`, `.png` and `.html` will be appended automatically
 * `color: boolean` - can suppress color output (default: `true`)
 * `quiet: boolean` - can suppress printing the test results (default: `false`)
 * `verbose: boolean|object` - print progress of the tests (default: `false`)

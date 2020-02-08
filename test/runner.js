@@ -2,6 +2,7 @@
 
 const run = require('../lib/runner')
 const { join } = require('path')
+const { lstat, remove } = require('fs-extra')
 
 function addTest (description, test) {
   if (typeof describe === 'function') {
@@ -11,13 +12,24 @@ function addTest (description, test) {
   }
 }
 
+async function checkFile (path) {
+  const stats = await lstat(path)
+  if (!stats.isFile()) {
+    throw new Error(`No file found at "${path}".`)
+  }
+}
+
 addTest('is the main export', assert => {
   const run2 = require('..')
   assert.equal(run, run2, 'Exported functions are the same')
 })
 
-addTest('returns proper results', assert =>
-  run({
+addTest('returns proper results', async assert => {
+  await remove(join(__dirname, '/output/results.txt'))
+  await remove(join(__dirname, '/output/results.json'))
+  await remove(join(__dirname, '/output/results.png'))
+  await remove(join(__dirname, '/output/results.html'))
+  return run({
     url: 'test/example/index.html',
     verbose: true,
     saveText: join(__dirname, '/output/results.txt'),
@@ -25,7 +37,7 @@ addTest('returns proper results', assert =>
     saveImage: join(__dirname, '/output/results.png'),
     saveHtml: join(__dirname, '/output/results.html')
   })
-    .then(suites => {
+    .then(async suites => {
       assert.ok(Array.isArray(suites), 'Results is an array of suites')
       for (let suiteIndex = 0; suiteIndex < suites.length; ++suiteIndex) {
         const suite = suites[suiteIndex]
@@ -65,8 +77,33 @@ addTest('returns proper results', assert =>
           }
         }
       }
+      await checkFile(join(__dirname, '/output/results.txt'))
+      await checkFile(join(__dirname, '/output/results.json'))
+      await checkFile(join(__dirname, '/output/results.png'))
+      await checkFile(join(__dirname, '/output/results.html'))
     })
-    .catch(error => console.error(error)))
+    .catch(error => assert.fail(error))
+})
+
+addTest('takes error snapshots', async assert => {
+  await remove(join(__dirname, '/output/error.log'))
+  await remove(join(__dirname, '/output/error.png'))
+  await remove(join(__dirname, '/output/error.html'))
+  return run({
+    url: 'test/example/missing.html',
+    errorSnapshot: join(__dirname, '/output/error'),
+    timeout: 5
+  })
+    .then(() => {
+      assert.fail('Missing file was not reported.')
+    })
+    .catch(async () => {
+      assert.pass('Missing file was reported.')
+      await checkFile(join(__dirname, '/output/error.log'))
+      await checkFile(join(__dirname, '/output/error.png'))
+      await checkFile(join(__dirname, '/output/error.png'))
+    })
+})
 
 if (require.main === module) {
   require('test')
