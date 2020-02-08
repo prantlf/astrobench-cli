@@ -1,3 +1,11 @@
+## [1.5.0](https://github.com/prantlf/astrobench-cli/compare/v1.4.1...v1.5.0) (2020-02-08)
+
+### Features
+
+* Save log, png and html snapshots in case of failure ([18385ef](https://github.com/prantlf/astrobench-cli/commit/18385ef9ef4a3f36239c4a621f00a97d971a8831))
+* Allow saving the console output to a file ([fd95666](https://github.com/prantlf/astrobench-cli/commit/fd956665fcee6756b2ffc20e44a68b58e16340d0))
+* Check benchmark results against quality thresholds ([36dbbbf](https://github.com/prantlf/astrobench-cli/commit/36dbbbf941d1783413bf7f0b1c0ce56e009bf8a0))
+
 ## [1.4.1](https://github.com/prantlf/astrobench-cli/compare/v1.4.0...v1.4.1) (2020-02-07)
 
 ### Bug Fixes
