@@ -15,6 +15,15 @@
       "skipFiles": [
         "<node_internals>/**"
       ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test Library",
+      "program": "${workspaceFolder}/test/checker",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
     }
   ]
 }
