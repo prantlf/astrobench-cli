@@ -210,6 +210,29 @@ In lieu of a formal styleguide, take care to maintain the existing coding
 style.  Add unit tests for any new or changed functionality. Lint and test
 your code using Grunt.
 
+## Docker Specifics
+
+If you run the benchmarks in Docker (actually, [Puppeteer in Docker]), you either do it under a non-root user, or pass the parameter `sandbox:true` if you run the tests as `root`. If you base your image on [Alpine Linux], launch Chromium from the distribution instead of the version bundled with Puppeteer. For example:
+
+```txt
+apk add chromium
+PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm ci
+astrobench -vS -x /usr/bin/chromium-browser -j results.json test.html
+```
+
+Or programmatically:
+
+```js
+const run = require('astrobench-cli')
+const results = await run({
+  url: 'test.html',
+  saveJson: 'results.json',
+  executable: '/usr/bin/chromium-browser
+  sandbox: false,
+  verbose: true
+})
+```
+
 ## License
 
 Copyright (c) 2020 Ferdinand Prantl
@@ -224,3 +247,5 @@ Licensed under the MIT license.
 [yarn]: https://yarnpkg.com/
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [Benchmark.js documentation]: https://benchmarkjs.com/docs
+[Puppeteer in Docker]: https://github.com/puppeteer/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
+[Alpine Linux]: https://alpinelinux.org/
