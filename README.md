@@ -52,7 +52,7 @@ B suite
 
 ## Command-Line Usage
 
-The `astrobench` script prints results formatted as it is typical for the results of tests written with [benchmark.js]. If running the benchmarks fails, exit code 1 will be returned to the caller.
+The `astrobench` script prints results formatted as it is typical for the results of tests written with [benchmark.js]. If running the benchmarks fails, exit code 1 will be returned to the caller. If a result threshold is not matched, exit code 2 will be returned to the caller.
 
 ```
 $ astrobench --help
@@ -82,6 +82,14 @@ Options:
   -P, --no-progress            suppress detailed progress logging
   -q, --quiet                  do not print the test results
   -v, --verbose                print progress of the tests
+  --no-aborted                 no benchmark allowed to abort
+  --min-hz                     minimum allowed frequency [ops/sec]
+  --max-deviation              maximum allowed standard deviation
+  --max-mean                   maximum allowed arithmetic mean [s]
+  --max-moe                    maximum allowed margin of error
+  --max-rme                    maximum allowed relative margin of error [%]
+  --max-sem                    standard error of the mean
+  --max-variance               maximum allowed variance
   -h, --help                   output usage information
 
  Available browsers are "chrome" and "firefox".
@@ -89,7 +97,7 @@ Options:
 
 Examples:
 
- $ astrobench -vLN examples/index.html
+ $ astrobench -vLN --no-aborted test/index.html
  $ astrobench -OS -f json http://localhost:8080/test.html
 ```
 
@@ -106,14 +114,22 @@ Execute all suites and print their results as text:
 
 ```js
 const run = require('astrobench-cli')
+const check = require('astrobench-cli/lib/checker')
 const format = require('astrobench-cli/lib/formatters/text')
-const results = await run({ url: 'example/index.html' })
-console.log(format(results))
+const suites = await run({ url: 'test/index.html' })
+console.log(format(suites))
+check(suites, {
+  aborted: false, // no aborted test
+  hz: 100,        // minimum ops/sec
+  rme: 3          // maximum relative margin of error
+})
 ```
 
 ### run(options: object): Promise
 
-The main module exports a function which runs a web page with benchmarks and returns a [Promise] to an array of objects with results of benchmark suites. Recognised options:
+The main module exports a function which runs a web page with benchmarks and returns a [Promise] to an array of objects with results of benchmark suites.
+
+Recognised options:
 
 * `browser: string` - web browser to launch (default: `'chrome'`)
 * `directory: string` - root directory to serve from (default: `'.'`)
@@ -201,12 +217,29 @@ An example of the test results. Benchmark properties `aborted`, `error`, `hz`, `
 ]
 ```
 
-### format(suites: array, options: object): string
+### format(suites: array, options?: object): string
 
-Modules `astrobench-cli/lib/formatters/text` and `astrobench-cli/lib/formatters/json` export a function which formats benchmark results to a string. Either to a readable text suitable for printing on the console, or to a JSON text for passing further to machine-processing tools. Recognised options:
+Modules `astrobench-cli/lib/formatters/text` and `astrobench-cli/lib/formatters/json` export a function which formats benchmark results to a string. Either to a readable text suitable for printing on the console, or to a JSON text for passing further to machine-processing tools.
+
+Recognised options:
 
 * `color: boolean` - can disable color output, if the formatter supports it (default: `true`)
 * `verbose: boolean` - add stack trace to failed benchmarks (default: `false`)
+
+### check(suites: array, thresholds: object): void
+
+Module `astrobench-cli/lib/checker` exports a function which checks benchmark results against specified thresholds. If some fail, the function throws an error.
+
+Supported thresholds:
+
+* `aborted: boolean` - allow aborted benchmarks (default: `true`)
+* `min-hz: number` - minimum allowed frequency [ops/sec]
+* `max-deviation: number` - maximum allowed standard deviation
+* `max-mean: number` - maximum allowed arithmetic mean [s]
+* `max-moe: number` - maximum allowed margin of error
+* `max-rme: number` - maximum allowed relative margin of error [%]
+* `max-sem: number` - standard error of the mean
+* `max-variance: number` - maximum allowed variance
 
 ## Contributing
 

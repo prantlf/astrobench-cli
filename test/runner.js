@@ -99,7 +99,7 @@ addTest('takes error snapshots', async assert => {
     timeout: 5
   })
     .then(() => {
-      assert.fail('Missing file was not reported.')
+      assert.fail({ message: 'Missing file was not reported.' })
     })
     .catch(async () => {
       assert.pass('Missing file was reported.')

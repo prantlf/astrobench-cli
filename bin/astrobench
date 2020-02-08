@@ -2,9 +2,11 @@
 
 const commander = require('commander')
 const { version, description } = require('../package.json')
-const run = require('../lib/runner')
+const runBenchmark = require('../lib/runner')
+const checkResults = require('../lib/checker')
 const formatToText = require('../lib/formatters/text')
 const formatToJSON = require('../lib/formatters/json')
+const { Instance: Chalk } = require('chalk')
 
 commander
   .version(version)
@@ -31,6 +33,14 @@ commander
   .option('-P, --no-progress', 'suppress detailed progress logging')
   .option('-q, --quiet', 'do not print the test results')
   .option('-v, --verbose', 'print progress of the tests')
+  .option('--no-aborted', 'no benchmark allowed to abort')
+  .option('--min-hz', 'minimum allowed frequency [ops/sec]')
+  .option('--max-deviation', 'maximum allowed standard deviation')
+  .option('--max-mean', 'maximum allowed arithmetic mean [s]')
+  .option('--max-moe', 'maximum allowed margin of error')
+  .option('--max-rme', 'maximum allowed relative margin of error [%]')
+  .option('--max-sem', 'standard error of the mean')
+  .option('--max-variance', 'maximum allowed variance')
   .on('--help', () => {
     console.log(`
  Available browsers are "chrome" and "firefox".
@@ -38,7 +48,7 @@ commander
 
 Examples:
 
- $ astrobench -vLN examples/index.html
+ $ astrobench -vLN --no-aborted test/index.html
  $ astrobench -CS -f json http://localhost:8080/test.html`)
   })
   .parse(process.argv)
@@ -80,7 +90,15 @@ let {
   saveImage,
   saveHtml,
   saveLog,
-  errorSnapshot
+  errorSnapshot,
+  aborted,
+  minHz,
+  maxDeviation,
+  maxMean,
+  maxMoe,
+  maxRme,
+  maxSem,
+  maxVariance
 } = commander
 validate(['chrome', 'firefox'].includes(browser),
   'Browser has to be either "chrome" or "firefox".')
@@ -94,7 +112,62 @@ if (verbose) {
   verbose = { network, browserConsole, progress }
 }
 
-run({
+function printResults (results) {
+  if (verbose) {
+    console.log()
+  }
+  const output = format === 'json'
+    ? formatToJSON(results) : formatToText(results, { color, verbose })
+  console.log(output)
+}
+
+function printFailedCheck ({ suite, benchmark, message }) {
+  const chalk = new Chalk(color !== false ? undefined : { level: 0 })
+  console.error(chalk.magenta('Checking results failed:'))
+  console.warn(chalk.red(`  ${message}`))
+  console.warn(chalk.yellow(`    suite: ${suite}`))
+  console.warn(chalk.cyan(`    benchmark: ${benchmark}`))
+}
+
+function handleResults (suites) {
+  if (!quiet) {
+    printResults(suites)
+  }
+  try {
+    if (verbose && verbose.progress !== false) {
+      console.log('--- Checking benchmark results')
+    }
+    checkResults(suites, {
+      aborted,
+      hz: minHz,
+      deviation: maxDeviation,
+      mean: maxMean,
+      moe: maxMoe,
+      rme: maxRme,
+      sem: maxSem,
+      variance: maxVariance
+    })
+  } catch (error) {
+    if (!quiet) {
+      console.log()
+    }
+    printFailedCheck(error)
+    process.exitCode = 2
+  }
+}
+
+function printError (message) {
+  const chalk = new Chalk(color !== false ? undefined : { level: 0 })
+  console.error(chalk.magenta('Running benchmarks failed:'))
+  console.error(chalk.red(`  ${message}`))
+}
+
+function handleError ({ message, stack }) {
+  printError(verbose ? stack : message)
+  process.exitCode = 1
+}
+
+runBenchmark({
   url,
   browser,
   directory,
@@ -113,21 +186,5 @@ run({
   saveLog,
   errorSnapshot
 })
-  .then(printResults)
-  .catch(printError)
-
-function printResults (results) {
-  if (verbose) {
-    console.log()
-  }
-  if (!quiet) {
-    const output = format === 'json'
-      ? formatToJSON(results) : formatToText(results, { color, verbose })
-    console.log(output)
-  }
-}
-
-function printError ({ message, stack }) {
-  console.error(verbose ? stack : message)
-  process.exitCode = 1
-}
+  .then(handleResults)
+  .catch(handleError)
