@@ -241,17 +241,20 @@ Supported thresholds:
 * `max-sem: number` - standard error of the mean
 * `max-variance: number` - maximum allowed variance
 
-## Contributing
+## Firefox
 
-In lieu of a formal styleguide, take care to maintain the existing coding
-style.  Add unit tests for any new or changed functionality. Lint and test
-your code using Grunt.
+[Firefox support is experimental] and the browser binaries are not available for oll operating systems. If you [work on Linux or OSX], you can install `puppeteer-firefox` as a peer-dependency of `astrobench-cli`
+
+```
+npm i -g astrobench-cli puppeteer-firefox
+astrobench -b firefox test/index.html
+```
 
 ## Docker Specifics
 
 If you run the benchmarks in Docker (actually, [Puppeteer in Docker]), you either do it under a non-root user, or pass the parameter `sandbox:true` if you run the tests as `root`. If you base your image on [Alpine Linux], launch Chromium from the distribution instead of the version bundled with Puppeteer. For example:
 
-```txt
+```
 apk add chromium
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm ci
 astrobench -vS -x /usr/bin/chromium-browser -j results.json test.html
@@ -270,6 +273,12 @@ const results = await run({
 })
 ```
 
+## Contributing
+
+In lieu of a formal styleguide, take care to maintain the existing coding
+style.  Add unit tests for any new or changed functionality. Lint and test
+your code using Grunt.
+
 ## License
 
 Copyright (c) 2020 Ferdinand Prantl
@@ -286,3 +295,5 @@ Licensed under the MIT license.
 [Benchmark.js documentation]: https://benchmarkjs.com/docs
 [Puppeteer in Docker]: https://github.com/puppeteer/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
 [Alpine Linux]: https://alpinelinux.org/
+[Firefox support is experimental]: https://github.com/puppeteer/puppeteer/tree/master/experimental/puppeteer-firefox#prototype-puppeteer-for-firefox
+[work on Linux or OSX]: https://github.com/puppeteer/juggler/releases
