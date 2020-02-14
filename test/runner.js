@@ -25,19 +25,21 @@ addTest('is the main export', assert => {
 })
 
 addTest('returns proper results', async assert => {
-  await remove(join(__dirname, '/output/results.log'))
-  await remove(join(__dirname, '/output/results.txt'))
-  await remove(join(__dirname, '/output/results.json'))
-  await remove(join(__dirname, '/output/results.png'))
-  await remove(join(__dirname, '/output/results.html'))
+  await remove(join(__dirname, 'output/results.log'))
+  await remove(join(__dirname, 'output/results.txt'))
+  await remove(join(__dirname, 'output/results.json'))
+  await remove(join(__dirname, 'output/results.png'))
+  await remove(join(__dirname, 'output/results.html'))
+  await remove(join(__dirname, 'performance'))
   return run({
     url: 'test/example/index.html',
     verbose: true,
-    saveLog: join(__dirname, '/output/results.log'),
-    saveText: join(__dirname, '/output/results.txt'),
-    saveJson: join(__dirname, '/output/results.json'),
-    saveImage: join(__dirname, '/output/results.png'),
-    saveHtml: join(__dirname, '/output/results.html')
+    saveLog: join(__dirname, 'output/results.log'),
+    saveText: join(__dirname, 'output/results.txt'),
+    saveJson: join(__dirname, 'output/results.json'),
+    saveImage: join(__dirname, 'output/results.png'),
+    saveHtml: join(__dirname, 'output/results.html'),
+    performance: join(__dirname, 'performance')
   })
     .then(async suites => {
       assert.ok(Array.isArray(suites), 'Results is an array of suites')
@@ -79,11 +81,12 @@ addTest('returns proper results', async assert => {
           }
         }
       }
-      await checkFile(join(__dirname, '/output/results.log'))
-      await checkFile(join(__dirname, '/output/results.txt'))
-      await checkFile(join(__dirname, '/output/results.json'))
-      await checkFile(join(__dirname, '/output/results.png'))
-      await checkFile(join(__dirname, '/output/results.html'))
+      await checkFile(join(__dirname, 'output/results.log'))
+      await checkFile(join(__dirname, 'output/results.txt'))
+      await checkFile(join(__dirname, 'output/results.json'))
+      await checkFile(join(__dirname, 'output/results.png'))
+      await checkFile(join(__dirname, 'output/results.html'))
+      await checkFile(join(__dirname, 'performance/A suite - String#match.json'))
     })
     .catch(error => assert.fail(error))
 })
