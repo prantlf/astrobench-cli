@@ -75,6 +75,7 @@ Options:
   -i, --save-image <file>      save PNG screenshot of the page
   -m, --save-html <file>       save HTML markup of the page
   -l, --save-log <file>        save a dump of the console
+  -o, --performance <path>     save performance profiles to a directory
   -r, --error-snapshot <path>  save LOG, HTML and PNG snapshots on failure
   -C, --no-color               suppress color output
   -L, --no-console             suppress browser console logging
@@ -145,6 +146,7 @@ Recognised options:
 * `saveImage: string` - save PNG screenshot of the page to the specified file path
 * `saveHtml: string` - save HTML markup of the page to the specified file path
 * `saveLog: string` - save a dump of the console to the specified file path
+* `performance: string` - save performance profiles to the specified directory
 * `errorSnapshot: string` - save LOG, HTML and PNG snapshots on failure to the specified file path prefix; file extensions `.log`, `.png` and `.html` will be appended automatically
 * `color: boolean` - can suppress color output (default: `true`)
 * `quiet: boolean` - can suppress printing the test results (default: `false`)

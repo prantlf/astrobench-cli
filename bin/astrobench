@@ -26,6 +26,7 @@ commander
   .option('-i, --save-image <file>', 'save PNG screenshot of the page')
   .option('-m, --save-html <file>', 'save HTML markup of the page')
   .option('-l, --save-log <file>', 'save a dump of the console')
+  .option('-o, --performance <path>', 'save performance profiles to a directory')
   .option('-r, --error-snapshot <path>', 'save LOG, HTML and PNG snapshots on failure')
   .option('-C, --no-color', 'suppress color output')
   .option('-L, --no-console', 'suppress browser console logging')
@@ -90,6 +91,7 @@ let {
   saveImage,
   saveHtml,
   saveLog,
+  performance,
   errorSnapshot,
   aborted,
   minHz,
@@ -184,6 +186,7 @@ runBenchmark({
   saveImage,
   saveHtml,
   saveLog,
+  performance,
   errorSnapshot
 })
   .then(handleResults)
