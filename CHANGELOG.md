@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/prantlf/astrobench-cli/compare/v1.5.0...v1.6.0) (2020-02-14)
+
+### Features
+
+* Enable performance profiling to a directory by benchmark ([eec61e6](https://github.com/prantlf/astrobench-cli/commit/eec61e65118d89b33a274b91dff037988a1580b1))
+
 ## [1.5.0](https://github.com/prantlf/astrobench-cli/compare/v1.4.1...v1.5.0) (2020-02-08)
 
 ### Features
