@@ -99,7 +99,8 @@ addTest('takes error snapshots', async assert => {
   await remove(join(__dirname, '/output/error.log'))
   await remove(join(__dirname, '/output/error.png'))
   await remove(join(__dirname, '/output/error.html'))
-  const canFirefox = process.platform === 'darwin' || process.platform === 'linux'
+  const canFirefox = process.platform === 'darwin' ||
+    (process.platform === 'linux' && process.env.TRAVIS !== 'true')
   return run({
     browser: canFirefox ? 'firefox' : 'chrome',
     url: 'test/example/missing.html',
