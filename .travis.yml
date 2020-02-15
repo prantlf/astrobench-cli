@@ -8,6 +8,9 @@ node_js:
   - node
   - lts/*
   - 8
+install:
+  - npm ci
+  - npm i --no-save puppeteer-firefox
 after_success:
   - npx codecov
   - npx semantic-release
