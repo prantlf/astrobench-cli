@@ -68,6 +68,7 @@ Options:
   -S, --no-sandbox             pass `--no-sandbox` to Puppeteer
   -M, --no-shm                 pass `--disable-dev-shm-usage` to Puppeteer
   -e, --executable             set the path to the browser executable
+  -w, --viewport <size>        sets the default viewport (default: 1024x678)
   -t, --timeout <number>       benchmark execution timeout [s] (default: 60)
   -f, --format <type>          printed results format (default: "text")
   -u, --output <path>          save all five result artefacts (--save-*)
@@ -143,6 +144,7 @@ Recognised options:
 * `shm: boolean` - pass `--disable-dev-shm-usage` to Puppeteer (default: `false`)
 * `ignoreHTTPSErrors: boolean` - force page loading despite of HTTPS errors
 * `executable: string` - set the path to the browser executable
+* `viewport: object` - sets the default viewport (default: `{ width: 1024, height: 768 }`)
 * `timeout: string` - benchmark execution timeout [s] (default: `60`)
 * `format: string` - printed results format (default: `'text'`)
 * `output: string` = save all five result artefacts (`--save-*`) to the specified file path prefix with file extensions `.txt`, `.json`, `.png`, `.html` and `.log`
@@ -240,7 +242,7 @@ try {
   const url = `http://localhost:${port}/test/index.html`
   await runner.launchBrowser({
     browser: 'chrome', headless: true, sandbox: false, shm: true,
-    ignoreHTTPSErrors: false
+    ignoreHTTPSErrors: false, viewport: { width: 1024, height: 768 }
   })
   await runner.openPage()
   await runner.navigateTo({ url })

@@ -14,12 +14,13 @@ commander
   .usage('[options] <URL>')
   .option('-b, --browser <name>', 'web browser to launch', 'chrome')
   .option('-d, --directory <path>', 'root directory to serve from', '.')
-  .option('-p, --port <number>', 'port for the server to listen to', 0, totInteger)
+  .option('-p, --port <number>', 'port for the server to listen to', 0, toInteger)
   .option('-H, --no-headless', 'show the browser window during the run')
   .option('-S, --no-sandbox', 'pass --no-sandbox to Puppeteer')
   .option('-M, --no-shm', 'pass --disable-dev-shm-usage to Puppeteer')
   .option('-e, --executable', 'set the path to the browser executable')
-  .option('-t, --timeout <number>', 'benchmark execution timeout [s]', 60, totInteger)
+  .option('-w, --viewport <size>', 'sets the default viewport', '1024x678')
+  .option('-t, --timeout <number>', 'benchmark execution timeout [s]', 60, toInteger)
   .option('-f, --format <type>', 'printed results format', 'text')
   .option('-u, --output <path>', 'save all five result artefacts (--save-*)')
   .option('-e, --save-text <file>', 'save results as text')
@@ -56,8 +57,8 @@ Examples:
   })
   .parse(process.argv)
 
-function totInteger (value) {
-  return parseInt(value)
+function toInteger (value) {
+  return +value
 }
 
 function validate (condition, message) {
@@ -81,6 +82,7 @@ let {
   shm,
   ignoreHttpsErrors: ignoreHTTPSErrors,
   executable,
+  viewport,
   timeout,
   format,
   color,
@@ -114,6 +116,10 @@ validate(timeout > 0 && timeout < 86400,
   'Benchmark timeout has to be a number of seconds greater than zero.')
 validate(['text', 'json'].includes(format),
   'Format has to be either "text" or "json".')
+validate(/^\d+x\d+$/.test(viewport),
+  'Viewport has to be formatted like "<width>x<height>".')
+const parsedViewport = /^(\d+)x(\d+)$/.exec(viewport)
+viewport = { width: +parsedViewport[1], height: +parsedViewport[2] }
 if (verbose) {
   verbose = { network, browserConsole, progress }
 }
@@ -182,6 +188,7 @@ runBenchmark({
   sandbox,
   shm,
   ignoreHTTPSErrors,
+  viewport,
   executable,
   timeout,
   color,
