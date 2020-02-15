@@ -32,6 +32,8 @@ B suite
   Deferred benchmark finished: 206 ops/sec 4.9ms ±0.42% (fastest)
 ```
 
+If you want to delay downloading of Chromium to the first test run, or if you want to use your own Chromium installation, set the `PUPPETEER_SKIP_CHROMIUM_DOWNLOAD` environment variable to `true` when you install `astrobench-cli`. You can use [other environment variables] too.
+
 ### Synopsis of A Testing Page
 
 ```html
@@ -364,3 +366,4 @@ Licensed under the MIT license.
 [`Browser`]: https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#class-browser
 [`Page`]: https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#class-page
 [Alpine Linux]: https://alpinelinux.org/
+[other environment variables]: https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#environment-variables
