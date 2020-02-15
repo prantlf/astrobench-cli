@@ -1,3 +1,14 @@
+# [1.7.0](https://github.com/prantlf/astrobench-cli/compare/v1.6.0...v1.7.0) (2020-02-15)
+
+### Bug Fixes
+
+* Save the error snapshot only in case of an error ([2aa2ca8](https://github.com/prantlf/astrobench-cli/commit/2aa2ca8a9169ee02e6aad7e7904c1cbf3a7debdc))
+
+### Features
+
+* Add the --output parameter setting all --save-* parameters ([7773110](https://github.com/prantlf/astrobench-cli/commit/7773110a0d1144505dc53256f1fcd56aaf29610a))
+* Introduce the Runner class for more flexibility ([f6d45fe](https://github.com/prantlf/astrobench-cli/commit/f6d45fe97211c72c31b36ec4cc6cf9361dc03251))
+
 ## [1.6.0](https://github.com/prantlf/astrobench-cli/compare/v1.5.0...v1.6.0) (2020-02-14)
 
 ### Features
