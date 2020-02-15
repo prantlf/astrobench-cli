@@ -92,6 +92,7 @@ addTest('returns proper results', async assert => {
 })
 
 addTest('takes error snapshots', async assert => {
+  await remove(join(__dirname, '/output/error.txt'))
   await remove(join(__dirname, '/output/error.log'))
   await remove(join(__dirname, '/output/error.png'))
   await remove(join(__dirname, '/output/error.html'))
@@ -106,6 +107,7 @@ addTest('takes error snapshots', async assert => {
     })
     .catch(async () => {
       assert.pass('Missing file was reported.')
+      await checkFile(join(__dirname, '/output/error.txt'))
       await checkFile(join(__dirname, '/output/error.log'))
       await checkFile(join(__dirname, '/output/error.png'))
       await checkFile(join(__dirname, '/output/error.png'))
