@@ -21,6 +21,7 @@ commander
   .option('-e, --executable', 'set the path to the browser executable')
   .option('-t, --timeout <number>', 'benchmark execution timeout [s]', 60, totInteger)
   .option('-f, --format <type>', 'printed results format', 'text')
+  .option('-u, --output <path>', 'save all five result artefacts (--save-*)')
   .option('-e, --save-text <file>', 'save results as text')
   .option('-j, --save-json <file>', 'save results as JSON')
   .option('-i, --save-image <file>', 'save PNG screenshot of the page')
@@ -86,6 +87,7 @@ let {
   network,
   console: browserConsole,
   progress,
+  output,
   saveText,
   saveJson,
   saveImage,
@@ -114,12 +116,12 @@ if (verbose) {
   verbose = { network, browserConsole, progress }
 }
 
-function printResults (results) {
+function printResults (suites) {
   if (verbose) {
     console.log()
   }
   const output = format === 'json'
-    ? formatToJSON(results) : formatToText(results, { color, verbose })
+    ? formatToJSON(suites) : formatToText(suites, { color, verbose })
   console.log(output)
 }
 
@@ -181,6 +183,7 @@ runBenchmark({
   timeout,
   color,
   verbose,
+  output,
   saveText,
   saveJson,
   saveImage,

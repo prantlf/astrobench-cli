@@ -70,6 +70,7 @@ Options:
   -e, --executable             set the path to the browser executable
   -t, --timeout <number>       benchmark execution timeout [s] (default: 60)
   -f, --format <type>          printed results format (default: "text")
+  -u, --output <path>          save all five result artefacts (--save-*)
   -e, --save-text <file>       save results as text
   -j, --save-json <file>       save results as JSON
   -i, --save-image <file>      save PNG screenshot of the page
@@ -142,6 +143,7 @@ Recognised options:
 * `executable: string` - set the path to the browser executable
 * `timeout: string` - benchmark execution timeout [s] (default: `60`)
 * `format: string` - printed results format (default: `'text'`)
+* `output: string` = save all five result artefacts (`--save-*`) to the specified file path prefix with file extensions `.txt`, `.json`, `.png`, `.html` and `.log`
 * `saveText: string` - save results as text to the specified file path
 * `saveJson: string` - save results as JSON to the specified file path
 * `saveImage: string` - save PNG screenshot of the page to the specified file path
@@ -242,7 +244,7 @@ try {
   await runner.runTests({ timeout: 60 })
   await runner.watchProgress({ timeout: 60, performance: 'performance' })
   const results = await runner.computeResults()
-  await runner.saveResults({ results, saveText, saveJson, saveImage, saveHtml, saveLog })
+  await runner.saveResults({ results, output: 'results/test' })
   console.log(format(results))
   check(results, {
     aborted: false, // no aborted test
