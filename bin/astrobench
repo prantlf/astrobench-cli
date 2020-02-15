@@ -20,6 +20,7 @@ commander
   .option('-M, --no-shm', 'pass --disable-dev-shm-usage to Puppeteer')
   .option('-e, --executable', 'set the path to the browser executable')
   .option('-w, --viewport <size>', 'sets the default viewport', '1024x678')
+  .option('-a, --user-data <path>', 'set the user (profile) data directory')
   .option('-t, --timeout <number>', 'benchmark execution timeout [s]', 60, toInteger)
   .option('-f, --format <type>', 'printed results format', 'text')
   .option('-u, --output <path>', 'save all five result artefacts (--save-*)')
@@ -83,6 +84,7 @@ let {
   ignoreHttpsErrors: ignoreHTTPSErrors,
   executable,
   viewport,
+  userData,
   timeout,
   format,
   color,
@@ -189,6 +191,7 @@ runBenchmark({
   shm,
   ignoreHTTPSErrors,
   viewport,
+  userData,
   executable,
   timeout,
   color,

@@ -69,6 +69,7 @@ Options:
   -M, --no-shm                 pass `--disable-dev-shm-usage` to Puppeteer
   -e, --executable             set the path to the browser executable
   -w, --viewport <size>        sets the default viewport (default: 1024x678)
+  -a, --user-data <path>       set the user (profile) data directory
   -t, --timeout <number>       benchmark execution timeout [s] (default: 60)
   -f, --format <type>          printed results format (default: "text")
   -u, --output <path>          save all five result artefacts (--save-*)
@@ -145,6 +146,7 @@ Recognised options:
 * `ignoreHTTPSErrors: boolean` - force page loading despite of HTTPS errors
 * `executable: string` - set the path to the browser executable
 * `viewport: object` - sets the default viewport (default: `{ width: 1024, height: 768 }`)
+* `userData: string` - set the user (profile) data directory
 * `timeout: string` - benchmark execution timeout [s] (default: `60`)
 * `format: string` - printed results format (default: `'text'`)
 * `output: string` = save all five result artefacts (`--save-*`) to the specified file path prefix with file extensions `.txt`, `.json`, `.png`, `.html` and `.log`
