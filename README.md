@@ -244,7 +244,7 @@ try {
   await runner.runTests({ timeout: 60 })
   await runner.watchProgress({ timeout: 60, performance: 'performance' })
   const results = await runner.computeResults()
-  await runner.saveResults({ results, output: 'results/test' })
+  await runner.saveResults({ results, output: 'output/results' })
   console.log(format(results))
   check(results, {
     aborted: false, // no aborted test
@@ -252,7 +252,7 @@ try {
     rme: 3          // maximum relative margin of error
   })
 } catch (error) {
-  await runner.saveError({ error, path: 'error' })
+  await runner.saveError({ error, path: 'output/error' })
 } finally {
   await runner.exitBrowser()
   await runner.stopServer()
