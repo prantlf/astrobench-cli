@@ -24,6 +24,13 @@ addTest('is the main export', assert => {
   assert.equal(run, run2, 'Exported functions are the same')
 })
 
+addTest('exports itself and the Runner class as named exports', assert => {
+  const { run: run2, Runner } = require('..')
+  assert.equal(typeof run2, 'function', 'The runner function is exported.')
+  assert.equal(run, run2, 'Exported functions are the same')
+  assert.equal(typeof Runner, 'function', 'The Runner class is exported.')
+})
+
 addTest('returns proper results', async assert => {
   await remove(join(__dirname, 'output/results.log'))
   await remove(join(__dirname, 'output/results.txt'))
@@ -96,7 +103,9 @@ addTest('takes error snapshots', async assert => {
   await remove(join(__dirname, '/output/error.log'))
   await remove(join(__dirname, '/output/error.png'))
   await remove(join(__dirname, '/output/error.html'))
+  const canFirefox = process.platform === 'darwin' || process.platform === 'linux'
   return run({
+    browser: canFirefox ? 'firefox' : 'chrome',
     url: 'test/example/missing.html',
     verbose: true,
     errorSnapshot: join(__dirname, '/output/error'),

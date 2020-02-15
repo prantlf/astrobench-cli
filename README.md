@@ -117,6 +117,7 @@ Execute all suites and print their results as text:
 const run = require('astrobench-cli')
 const check = require('astrobench-cli/lib/checker')
 const format = require('astrobench-cli/lib/formatters/text')
+
 const suites = await run({ url: 'test/index.html' })
 console.log(format(suites))
 check(suites, {
@@ -128,7 +129,7 @@ check(suites, {
 
 ### run(options: object): Promise
 
-The main module exports a function which runs a web page with benchmarks and returns a [Promise] to an array of objects with results of benchmark suites.
+The main module exports a function which runs a web page with benchmarks and returns a [Promise] to an array of objects with results of benchmark suites. See also the [`Runner`] class below.
 
 Recognised options:
 
@@ -219,6 +220,54 @@ An example of the test results. Benchmark properties `aborted`, `error`, `hz`, `
 ]
 ```
 
+### class Runner
+
+Instead of calling the [`run`] method, you can can construct an instance of the `Runner` class, call its methods and access its properties among the calls. The named parameter names below have the same meaning as described for the [`run`] method above. This is basically what the [example above] does using the [`run`] method with default parameters:
+
+```js
+const { Runner } = require('astrobench-cli')
+const check = require('astrobench-cli/lib/checker')
+const format = require('astrobench-cli/lib/formatters/text')
+
+const runner = new Runner({ color: true, verbose: false })
+try {
+  await this.startServer({ directory: '.', port: 0 })
+  const port = this.server.address().port
+  const url = `http://localhost:${port}/test/index.html`
+  await runner.launchBrowser({
+    browser: 'chrome', headless: true, sandbox: false, shm: true
+  })
+  await runner.openPage()
+  await runner.navigateTo({ url })
+  await runner.runTests({ timeout: 60 })
+  await runner.watchProgress({ timeout: 60, performance: 'performance' })
+  const results = await runner.computeResults()
+  await runner.saveResults({ results, saveText, saveJson, saveImage, saveHtml, saveLog })
+  console.log(format(results))
+  check(results, {
+    aborted: false, // no aborted test
+    hz: 100,        // minimum ops/sec
+    rme: 3          // maximum relative margin of error
+  })
+} catch (error) {
+  await runner.saveError({ error, path: 'error' })
+} finally {
+  await runner.exitBrowser()
+  await runner.stopServer()
+}
+```
+
+Starting and stopping the HTTP server is optional. You will want to do it, if your testing page is located in the local file system.
+
+If you want to test multiple pages and always start on a new page, use `closePage` and `openPage` methods, before you navigate to the new URL. The console log (the `log` property) will be reset when you do it.
+
+Properties of an instance of the `Runner` class:
+
+* `server: object` - points to an instance of [`connect`] if `startServer` was called
+* `browser: object` - points to an instance of [`Browser`] after `launchBrowser` was called
+* `page: object` - points to an instance of [`Page`] after `openPage` was called
+* `log: string` - the immediate content of the browser console
+
 ### format(suites: array, options?: object): string
 
 Modules `astrobench-cli/lib/formatters/text` and `astrobench-cli/lib/formatters/json` export a function which formats benchmark results to a string. Either to a readable text suitable for printing on the console, or to a JSON text for passing further to machine-processing tools.
@@ -245,7 +294,7 @@ Supported thresholds:
 
 ## Firefox
 
-[Firefox support is experimental] and the browser binaries are not available for oll operating systems. If you [work on Linux or OSX], you can install `puppeteer-firefox` as a peer-dependency of `astrobench-cli`
+[Firefox support is experimental] and the browser binaries are not available for oll operating systems. If you [work on Linux or OSX], you can install `puppeteer-firefox` as a peer-dependency of `astrobench-cli`:
 
 ```
 npm i -g astrobench-cli puppeteer-firefox
@@ -254,7 +303,7 @@ astrobench -b firefox test/index.html
 
 ## Docker Specifics
 
-If you run the benchmarks in Docker (actually, [Puppeteer in Docker]), you either do it under a non-root user, or pass the parameter `sandbox:true` if you run the tests as `root`. If you base your image on [Alpine Linux], launch Chromium from the distribution instead of the version bundled with Puppeteer. For example:
+If you run the benchmarks in Docker (actually, [Puppeteer in Docker]), you either do it under a non-root user, or pass the parameter `sandbox:true` if you run the tests as `root`. If you base your image on [Alpine Linux], launch Chromium from the distribution instead of the version bundled with Puppeteer. For example, for [Alpine Linux]:
 
 ```
 apk add chromium
@@ -299,3 +348,10 @@ Licensed under the MIT license.
 [Alpine Linux]: https://alpinelinux.org/
 [Firefox support is experimental]: https://github.com/puppeteer/puppeteer/tree/master/experimental/puppeteer-firefox#prototype-puppeteer-for-firefox
 [work on Linux or OSX]: https://github.com/puppeteer/juggler/releases
+[`Runner`]: #class-runner
+[example above]: #programmatic-usage
+[`run`]: #runoptions-object-promise
+[`connect`]: https://github.com/senchalabs/connect#readme
+[`Browser`]: https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#class-browser
+[`Page`]: https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#class-page
+[Alpine Linux]: https://alpinelinux.org/
