@@ -84,6 +84,7 @@ Options:
   -P, --no-progress            suppress detailed progress logging
   -q, --quiet                  do not print the test results
   -v, --verbose                print progress of the tests
+  --ignore-https-errors        force page loading despite of HTTPS errors
   --no-aborted                 no benchmark allowed to abort
   --min-hz                     minimum allowed frequency [ops/sec]
   --max-deviation              maximum allowed standard deviation
@@ -140,6 +141,7 @@ Recognised options:
 * `headless: boolean` - can show the browser window during the run (default: `true`)
 * `sandbox: boolean` - pass `--no-sandbox` to Puppeteer (default: `false`)
 * `shm: boolean` - pass `--disable-dev-shm-usage` to Puppeteer (default: `false`)
+* `ignoreHTTPSErrors: boolean` - force page loading despite of HTTPS errors
 * `executable: string` - set the path to the browser executable
 * `timeout: string` - benchmark execution timeout [s] (default: `60`)
 * `format: string` - printed results format (default: `'text'`)
@@ -237,7 +239,8 @@ try {
   const port = this.server.address().port
   const url = `http://localhost:${port}/test/index.html`
   await runner.launchBrowser({
-    browser: 'chrome', headless: true, sandbox: false, shm: true
+    browser: 'chrome', headless: true, sandbox: false, shm: true,
+    ignoreHTTPSErrors: false
   })
   await runner.openPage()
   await runner.navigateTo({ url })

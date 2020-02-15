@@ -35,6 +35,7 @@ commander
   .option('-P, --no-progress', 'suppress detailed progress logging')
   .option('-q, --quiet', 'do not print the test results')
   .option('-v, --verbose', 'print progress of the tests')
+  .option('--ignore-https-errors', 'force page loading despite of HTTPS errors')
   .option('--no-aborted', 'no benchmark allowed to abort')
   .option('--min-hz', 'minimum allowed frequency [ops/sec]')
   .option('--max-deviation', 'maximum allowed standard deviation')
@@ -78,6 +79,7 @@ let {
   headless,
   sandbox,
   shm,
+  ignoreHttpsErrors: ignoreHTTPSErrors,
   executable,
   timeout,
   format,
@@ -179,6 +181,7 @@ runBenchmark({
   headless,
   sandbox,
   shm,
+  ignoreHTTPSErrors,
   executable,
   timeout,
   color,
