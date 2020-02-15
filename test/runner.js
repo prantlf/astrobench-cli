@@ -37,15 +37,11 @@ addTest('returns proper results', async assert => {
   await remove(join(__dirname, 'output/results.json'))
   await remove(join(__dirname, 'output/results.png'))
   await remove(join(__dirname, 'output/results.html'))
-  await remove(join(__dirname, 'performance'))
+  await remove(join(__dirname, 'performance/A suite - String#match.json'))
   return run({
     url: 'test/example/index.html',
     verbose: true,
-    saveLog: join(__dirname, 'output/results.log'),
-    saveText: join(__dirname, 'output/results.txt'),
-    saveJson: join(__dirname, 'output/results.json'),
-    saveImage: join(__dirname, 'output/results.png'),
-    saveHtml: join(__dirname, 'output/results.html'),
+    output: join(__dirname, 'output/results'),
     performance: join(__dirname, 'performance')
   })
     .then(async suites => {
