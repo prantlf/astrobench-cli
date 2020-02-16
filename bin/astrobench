@@ -125,6 +125,9 @@ viewport = { width: +parsedViewport[1], height: +parsedViewport[2] }
 if (verbose) {
   verbose = { network, browserConsole, progress }
 }
+if (color === undefined) {
+  color = process.stdout.isTTY
+}
 
 function printResults (suites) {
   if (verbose) {
