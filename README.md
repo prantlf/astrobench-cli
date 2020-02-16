@@ -69,6 +69,7 @@ Options:
   -H, --no-headless            show the browser window during the run
   -S, --no-sandbox             pass `--no-sandbox` to Puppeteer
   -M, --no-shm                 pass `--disable-dev-shm-usage` to Puppeteer
+  --ignore-https-errors        force page loading despite of HTTPS errors
   -e, --executable             set the path to the browser executable
   -w, --viewport <size>        sets the default viewport (default: 1024x678)
   -a, --user-data <path>       set the user (profile) data directory
@@ -88,7 +89,6 @@ Options:
   -P, --no-progress            suppress detailed progress logging
   -q, --quiet                  do not print the test results
   -v, --verbose                print progress of the tests
-  --ignore-https-errors        force page loading despite of HTTPS errors
   --no-aborted                 no benchmark allowed to abort
   --min-hz                     minimum allowed frequency [ops/sec]
   --max-deviation              maximum allowed standard deviation
