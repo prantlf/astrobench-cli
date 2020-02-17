@@ -1,3 +1,18 @@
+# [1.8.0](https://github.com/prantlf/astrobench-cli/compare/v1.7.0...v1.8.0) (2020-02-17)
+
+### Bug Fixes
+
+* Enable the coloured output by default only on TTY ([26df09a](https://github.com/prantlf/astrobench-cli/commit/26df09a8dc225935b96c04c925f4066a9254b78c))
+
+### Features
+
+* Add the --ignore-https-errors to force page loading nevertheless ([40b6499](https://github.com/prantlf/astrobench-cli/commit/40b649922115cb0784182a042d48da19f059284a))
+* Add the --user-data parameter to set the user data (profile) directory ([ecbe38d](https://github.com/prantlf/astrobench-cli/commit/ecbe38deab6517efea198ff0a6e12a4e58e8a178))
+* Add the --viewport parameter to set the default viewport ([22eefc0](https://github.com/prantlf/astrobench-cli/commit/22eefc0e63c8cbf36c004fc49f43e81fb4c9f840))
+* Download Chromium automatically ([55a164c](https://github.com/prantlf/astrobench-cli/commit/55a164c12689f9ad7c00dad4090596ca83d25304))
+* Improve the browser-downloading progressbar ([3f516cf](https://github.com/prantlf/astrobench-cli/commit/3f516cfa9e7894724c31ab3723670f53cd5594b6))
+* Show progresbar when downloading the browser ([341597d](https://github.com/prantlf/astrobench-cli/commit/341597d249ce621048f2adbc53e4334fefa9a779))
+
 # [1.7.0](https://github.com/prantlf/astrobench-cli/compare/v1.6.0...v1.7.0) (2020-02-15)
 
 ### Bug Fixes
