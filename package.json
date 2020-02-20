@@ -35,7 +35,7 @@
     "node": ">=8"
   },
   "scripts": {
-    "lint": "eslint --fix bin/* lib/*.js 'test/**/*.js'",
+    "lint": "eslint --fix bin/* lib/**/*.js 'test/**/*.js'",
     "check": "nyc --silent node test/text-formatter && nyc --silent --no-clean node test/json-formatter && nyc --silent --no-clean node test/checker && nyc --silent --no-clean node test/runner && nyc --silent --no-clean ./bin/astrobench && nyc report && nyc check-coverage",
     "test": "npm run lint && npm run check"
   },
