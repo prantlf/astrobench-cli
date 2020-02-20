@@ -7,7 +7,7 @@
 
 [![NPM Downloads](https://nodei.co/npm/astrobench-cli.png?downloads=true&stars=true)](https://www.npmjs.com/package/astrobench-cli)
 
-Runs benchmarks on web pages written with [@prantlf/astrobench] from the command line using [Puppeteer].
+Runs benchmarks on web pages written with [@prantlf/astrobench] from the command line using [Puppeteer]. If you want to generate timeline or comparison charts from the performance results, see [benchart].
 
 ![astrobench-cli usage screencast](doc/astrobench-example.gif)
 
@@ -54,7 +54,7 @@ If you want to delay downloading of Chromium to the first test run, or if you wa
 
 ## Command-Line Usage
 
-The `astrobench` script prints results formatted as it is typical for the results of tests written with [benchmark.js]. If running the benchmarks fails, exit code 1 will be returned to the caller. If a result threshold is not matched, exit code 2 will be returned to the caller.
+The `astrobench` script prints results formatted as it is typical for the results of tests written with [Benchmark.js]. If running the benchmarks fails, exit code 1 will be returned to the caller. If a result threshold is not matched, exit code 2 will be returned to the caller.
 
 ```
 $ astrobench --help
@@ -339,7 +339,7 @@ const results = await run({
 
 In lieu of a formal styleguide, take care to maintain the existing coding
 style.  Add unit tests for any new or changed functionality. Lint and test
-your code using npm.
+your code using `npm`.
 
 ## License
 
@@ -348,7 +348,8 @@ Copyright (c) 2020 Ferdinand Prantl
 Licensed under the MIT license.
 
 [@prantlf/astrobench]: http://prantlf.github.com/astrobench/
-[benchmark.js]: https://benchmarkjs.com/
+[benchart]: http://github.com/prantlf/benchart
+[Benchmark.js]: https://benchmarkjs.com/
 [Puppeteer]: https://pptr.dev/
 [Node.js]: http://nodejs.org/
 [npm]: https://www.npmjs.org/
