@@ -13,6 +13,7 @@ function addTest (description, test) {
 addTest('text formatter', assert => {
   const results = require('./results.json')
   const output = format(results, { color: false })
+  // eslint-disable-next-line prefer-regex-literals
   const pattern = new RegExp(`A suite
   String#match finished: [.,0-9]+ ops\\/sec ±[.,0-9]+% \\([.,0-9]+% slower\\)
   RegExp#test finished: [.,0-9]+ ops\\/sec ±[.,0-9]+% \\(fastest\\)

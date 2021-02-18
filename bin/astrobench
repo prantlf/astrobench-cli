@@ -109,7 +109,7 @@ let {
   maxRme,
   maxSem,
   maxVariance
-} = commander
+} = commander.opts()
 validate(['chrome', 'firefox'].includes(browser),
   'Browser has to be either "chrome" or "firefox".')
 validate(port >= 0 && port <= 65535,
@@ -134,7 +134,8 @@ function printResults (suites) {
     console.log()
   }
   const output = format === 'json'
-    ? formatToJSON(suites) : formatToText(suites, { color, verbose })
+    ? formatToJSON(suites)
+    : formatToText(suites, { color, verbose })
   console.log(output)
 }
 

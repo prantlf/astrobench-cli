@@ -32,7 +32,7 @@
     "lib"
   ],
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "scripts": {
     "lint": "eslint --fix bin/* lib/**/*.js 'test/**/*.js'",
@@ -54,24 +54,24 @@
     "puppeteer"
   ],
   "dependencies": {
-    "chalk": "3.0.0",
-    "commander": "4.1.1",
+    "chalk": "4.1.0",
+    "commander": "7.1.0",
     "connect": "3.7.0",
-    "fs-extra": "8.1.0",
+    "fs-extra": "9.1.0",
     "progress": "2.0.3",
-    "puppeteer": "2.1.1",
+    "puppeteer": "7.1.0",
     "serve-static": "1.14.1"
   },
   "devDependencies": {
     "@prantlf/astrobench": "1.1.0",
     "@prantlf/jsonlint": "10.2.0",
-    "eslint": "6.8.0",
-    "eslint-config-standard": "14.1.0",
-    "eslint-plugin-import": "2.20.1",
-    "eslint-plugin-node": "11.0.0",
-    "eslint-plugin-promise": "4.2.1",
-    "eslint-plugin-standard": "4.0.1",
-    "nyc": "15.0.0",
+    "eslint": "7.20.0",
+    "eslint-config-standard": "16.0.2",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.3.1",
+    "eslint-plugin-standard": "4.1.0",
+    "nyc": "15.1.0",
     "test": "0.6.0"
   },
   "peerDependecies": {
