@@ -1,30 +1,30 @@
 # Changes
 
-# [3.0.0](https://github.com/prantlf/astrobench-cli/compare/v2.0.1...v3.0.0) (2024-01-06)
+## [3.0.0](https://github.com/prantlf/astrobench-cli/compare/v2.0.1...v3.0.0) (2024-01-06)
 
-## Features
+### Features
 
 * Remove the executable parameter ([d7b6db4](https://github.com/prantlf/astrobench-cli/commit/d7b6db4a543d857c34efdb309bfc463bfe6cedd5))
 
-# [2.0.1](https://github.com/prantlf/astrobench-cli/compare/v2.0.0...v2.0.1) (2021-07-09)
+## [2.0.1](https://github.com/prantlf/astrobench-cli/compare/v2.0.0...v2.0.1) (2021-07-09)
 
-## BREAKING CHANGES
+### BREAKING CHANGES
 
 Require Node.js 10 or newer.
 
-# [2.0.0](https://github.com/prantlf/astrobench-cli/compare/v1.8.1...v2.0.0) (2021-02-18)
+## [2.0.0](https://github.com/prantlf/astrobench-cli/compare/v1.8.1...v2.0.0) (2021-02-18)
 
-## Chores
+### Chores
 
 * Upgrade NPM dependencies ([bb19f34](https://github.com/prantlf/astrobench-cli/commit/bb19f34acc68bb4ec5e883d35f751ed50ee049cd))
 
-# [1.8.1](https://github.com/prantlf/astrobench-cli/compare/v1.8.0...v1.8.1) (2020-02-20)
+## [1.8.1](https://github.com/prantlf/astrobench-cli/compare/v1.8.0...v1.8.1) (2020-02-20)
 
-## Bug Fixes
+### Bug Fixes
 
 * Enable maxAge caching ([57fd3ec](https://github.com/prantlf/astrobench-cli/commit/57fd3ece73ba3057bd1b2ddd64b728f98af779a3))
 
-# [1.8.0](https://github.com/prantlf/astrobench-cli/compare/v1.7.0...v1.8.0) (2020-02-17)
+## [1.8.0](https://github.com/prantlf/astrobench-cli/compare/v1.7.0...v1.8.0) (2020-02-17)
 
 ### Bug Fixes
 
@@ -39,7 +39,7 @@ Require Node.js 10 or newer.
 * Improve the browser-downloading progressbar ([3f516cf](https://github.com/prantlf/astrobench-cli/commit/3f516cfa9e7894724c31ab3723670f53cd5594b6))
 * Show progresbar when downloading the browser ([341597d](https://github.com/prantlf/astrobench-cli/commit/341597d249ce621048f2adbc53e4334fefa9a779))
 
-# [1.7.0](https://github.com/prantlf/astrobench-cli/compare/v1.6.0...v1.7.0) (2020-02-15)
+## [1.7.0](https://github.com/prantlf/astrobench-cli/compare/v1.6.0...v1.7.0) (2020-02-15)
 
 ### Bug Fixes
 
@@ -133,6 +133,6 @@ Require Node.js 10 or newer.
 
 * Upgrade the dependency on @prantlf/astrobench ([780f15e](https://github.com/prantlf/astrobench/commit/780f15e1841c20d7425ace7b7c7216efa001d268))
 
-## 1.0.0 (2020-01-31)
+### 1.0.0 (2020-01-31)
 
 Initial release.
