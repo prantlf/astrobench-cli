@@ -1,5 +1,29 @@
 # Changes
 
+# [3.0.0](https://github.com/prantlf/astrobench-cli/compare/v2.0.1...v3.0.0) (2024-01-06)
+
+## Features
+
+* Remove the executable parameter ([d7b6db4](https://github.com/prantlf/astrobench-cli/commit/d7b6db4a543d857c34efdb309bfc463bfe6cedd5))
+
+# [2.0.1](https://github.com/prantlf/astrobench-cli/compare/v2.0.0...v2.0.1) (2021-07-09)
+
+## BREAKING CHANGES
+
+Require Node.js 10 or newer.
+
+# [2.0.0](https://github.com/prantlf/astrobench-cli/compare/v1.8.1...v2.0.0) (2021-02-18)
+
+## Chores
+
+* Upgrade NPM dependencies ([bb19f34](https://github.com/prantlf/astrobench-cli/commit/bb19f34acc68bb4ec5e883d35f751ed50ee049cd))
+
+# [1.8.1](https://github.com/prantlf/astrobench-cli/compare/v1.8.0...v1.8.1) (2020-02-20)
+
+## Bug Fixes
+
+* Enable maxAge caching ([57fd3ec](https://github.com/prantlf/astrobench-cli/commit/57fd3ece73ba3057bd1b2ddd64b728f98af779a3))
+
 # [1.8.0](https://github.com/prantlf/astrobench-cli/compare/v1.7.0...v1.8.0) (2020-02-17)
 
 ### Bug Fixes
