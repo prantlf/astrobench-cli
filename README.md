@@ -10,7 +10,7 @@ Runs benchmarks on web pages written with [@prantlf/astrobench] from the command
 
 ## Getting Started
 
-Make sure that you have [Node.js] >= 8 installed. Install `astrobench-cli` globally:
+Make sure that you have [Node.js] >= 18 installed. Install `astrobench-cli` globally:
 
 ```
 npm i -g astrobench-cli
