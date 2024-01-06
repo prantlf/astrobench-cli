@@ -1,3 +1,5 @@
+# Changes
+
 # [1.8.0](https://github.com/prantlf/astrobench-cli/compare/v1.7.0...v1.8.0) (2020-02-17)
 
 ### Bug Fixes

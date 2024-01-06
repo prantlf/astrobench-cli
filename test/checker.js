@@ -1,98 +1,87 @@
-/* global it */
-
+const test = require('test')
+const { fail, ok } = require('assert')
 const { tokenize } = require('@prantlf/jsonlint')
 const { print } = require('@prantlf/jsonlint/lib/printer')
 const check = require('../lib/checker')
 const suites = require('./results.json')
-
-function addTest (description, test) {
-  if (typeof describe === 'function') {
-    it(description, test)
-  } else {
-    exports[`test checker: ${description}`] = test
-  }
-}
 
 function formatThresholds (thresholds) {
   const tokens = tokenize(JSON.stringify(thresholds), { rawTokens: true })
   return print(tokens, { indent: 0, stripObjectKeys: true }).replace(/\n/g, '')
 }
 
-function checkSuccess (assert, thresholds) {
+function checkSuccess (thresholds) {
   const description = formatThresholds(thresholds)
   try {
     check(suites, thresholds)
-    assert.pass(`Check for ${description} passed.`)
+    ok(`Check for ${description} passed.`)
+  /* node:coverage ignore next 4 */
   } catch (error) {
     console.error(error)
-    assert.fail({ message: `Check for ${description} failed.` })
+    fail({ message: `Check for ${description} failed.` })
   }
 }
 
-function checkFailure (assert, thresholds) {
+function checkFailure (thresholds) {
   const description = formatThresholds(thresholds)
   let failed
   try {
     check(suites, thresholds)
     failed = true
-    assert.fail({ message: `Check for ${description} passed.` })
+    fail({ message: `Check for ${description} passed.` })
   } catch (error) {
+    /* node:coverage ignore next 3 */
     if (failed) {
       throw error
     }
-    assert.pass(`Check for ${description} failed.`)
+    ok(`Check for ${description} failed.`)
   }
 }
 
-addTest('passes if no threshold is specified', assert =>
-  checkSuccess(assert, {}))
+test('passes if no threshold is specified', () =>
+  checkSuccess({}))
 
-addTest('fails if an aborted test is not allowed', assert =>
-  checkFailure(assert, { aborted: false }))
+test('fails if an aborted test is not allowed', () =>
+  checkFailure({ aborted: false }))
 
-addTest('passes if all tests does reach the minimum hz', assert =>
-  checkSuccess(assert, { hz: 200 }))
+test('passes if all tests does reach the minimum hz', () =>
+  checkSuccess({ hz: 200 }))
 
-addTest('fails if a test does not reach the minimum hz', assert =>
-  checkFailure(assert, { hz: 20000000 }))
+test('fails if a test does not reach the minimum hz', () =>
+  checkFailure({ hz: 20000000 }))
 
-addTest('passes if no test exceeds the maximum mean', assert =>
-  checkSuccess(assert, { mean: 1 }))
+test('passes if no test exceeds the maximum mean', () =>
+  checkSuccess({ mean: 1 }))
 
-addTest('fails if a test exceeds the maximum mean', assert =>
-  checkFailure(assert, { mean: 1e-9 }))
+test('fails if a test exceeds the maximum mean', () =>
+  checkFailure({ mean: 1e-9 }))
 
-addTest('passes if no test exceeds the maximum rme', assert =>
-  checkSuccess(assert, { rme: 3 }))
+test('passes if no test exceeds the maximum rme', () =>
+  checkSuccess({ rme: 3 }))
 
-addTest('fails if a test exceeds the maximum rme', assert =>
-  checkFailure(assert, { rme: 2 }))
+test('fails if a test exceeds the maximum rme', () =>
+  checkFailure({ rme: 2 }))
 
-addTest('passes if no test exceeds the maximum moe', assert =>
-  checkSuccess(assert, { moe: 2e-9 }))
+test('passes if no test exceeds the maximum moe', () =>
+  checkSuccess({ moe: 2e-9 }))
 
-addTest('fails if a test exceeds the maximum moe', assert =>
-  checkFailure(assert, { moe: 1.5e-9 }))
+test('fails if a test exceeds the maximum moe', () =>
+  checkFailure({ moe: 1.5e-9 }))
 
-addTest('passes if no test exceeds the maximum sem', assert =>
-  checkSuccess(assert, { sem: 2e-9 }))
+test('passes if no test exceeds the maximum sem', () =>
+  checkSuccess({ sem: 2e-9 }))
 
-addTest('fails if a test exceeds the maximum sem', assert =>
-  checkFailure(assert, { sem: 1e-9 }))
+test('fails if a test exceeds the maximum sem', () =>
+  checkFailure({ sem: 1e-9 }))
 
-addTest('passes if no test exceeds the maximum deviation', assert =>
-  checkSuccess(assert, { deviation: 8e-9 }))
+test('passes if no test exceeds the maximum deviation', () =>
+  checkSuccess({ deviation: 8e-9 }))
 
-addTest('fails if a test exceeds the maximum deviation', assert =>
-  checkFailure(assert, { deviation: 4e-9 }))
+test('fails if a test exceeds the maximum deviation', () =>
+  checkFailure({ deviation: 4e-9 }))
 
-addTest('passes if no test exceeds the maximum variance', assert =>
-  checkSuccess(assert, { variance: 6e-17 }))
+test('passes if no test exceeds the maximum variance', () =>
+  checkSuccess({ variance: 6e-17 }))
 
-addTest('fails if a test exceeds the maximum variance', assert =>
-  checkFailure(assert, { variance: 2e-17 }))
-
-if (require.main === module) {
-  require('test')
-    .run(exports)
-}
+test('fails if a test exceeds the maximum variance', () =>
+  checkFailure({ variance: 2e-17 }))

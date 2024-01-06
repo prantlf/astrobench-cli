@@ -1,16 +1,8 @@
-/* global it */
-
+const test = require('test')
+const { fail, ok, strictEqual } = require('assert')
 const run = require('../lib/runner')
 const { join } = require('path')
 const { lstat, remove } = require('fs-extra')
-
-function addTest (description, test) {
-  if (typeof describe === 'function') {
-    it(description, test)
-  } else {
-    exports[`test runner: ${description}`] = test
-  }
-}
 
 async function checkFile (path) {
   const stats = await lstat(path)
@@ -19,19 +11,19 @@ async function checkFile (path) {
   }
 }
 
-addTest('is the main export', assert => {
+test('is the main export', () => {
   const run2 = require('..')
-  assert.equal(run, run2, 'Exported functions are the same')
+  strictEqual(run, run2, 'Exported functions are the same')
 })
 
-addTest('exports itself and the Runner class as named exports', assert => {
+test('exports itself and the Runner class as named exports', () => {
   const { run: run2, Runner } = require('..')
-  assert.equal(typeof run2, 'function', 'The runner function is exported.')
-  assert.equal(run, run2, 'Exported functions are the same')
-  assert.equal(typeof Runner, 'function', 'The Runner class is exported.')
+  strictEqual(typeof run2, 'function', 'The runner function is exported.')
+  strictEqual(run, run2, 'Exported functions are the same')
+  strictEqual(typeof Runner, 'function', 'The Runner class is exported.')
 })
 
-addTest('returns proper results', async assert => {
+test('returns proper results', async () => {
   await remove(join(__dirname, 'output/results.log'))
   await remove(join(__dirname, 'output/results.txt'))
   await remove(join(__dirname, 'output/results.json'))
@@ -45,42 +37,42 @@ addTest('returns proper results', async assert => {
     performance: join(__dirname, 'performance')
   })
     .then(async suites => {
-      assert.ok(Array.isArray(suites), 'Results is an array of suites')
+      ok(Array.isArray(suites), 'Results is an array of suites')
       for (let suiteIndex = 0; suiteIndex < suites.length; ++suiteIndex) {
         const suite = suites[suiteIndex]
-        assert.equal(typeof suite, 'object', `The suite ${suiteIndex} is an object`)
+        strictEqual(typeof suite, 'object', `The suite ${suiteIndex} is an object`)
         const { name, benchmarks } = suite
-        assert.equal(typeof name, 'string', 'A suite has a name')
-        assert.ok(Array.isArray(benchmarks), 'A suite contains an array of benchmarks')
+        strictEqual(typeof name, 'string', 'A suite has a name')
+        ok(Array.isArray(benchmarks), 'A suite contains an array of benchmarks')
         for (let benchIndex = 0; benchIndex < benchmarks.length; ++benchIndex) {
           const benchmark = benchmarks[benchIndex]
-          assert.equal(typeof benchmark, 'object', `The benchmark ${benchIndex} is an object`)
+          strictEqual(typeof benchmark, 'object', `The benchmark ${benchIndex} is an object`)
           const { name, error, aborted, hz, stats, sum, times } = benchmark
-          assert.equal(typeof name, 'string', 'A benchmark has a name')
+          strictEqual(typeof name, 'string', 'A benchmark has a name')
           if (error) {
-            assert.equal(aborted, true, 'A failed benchmark has been aborted')
+            strictEqual(aborted, true, 'A failed benchmark has been aborted')
             const { message, name, stack } = error
-            assert.equal(typeof message, 'string', 'A failure contains a message')
-            assert.equal(typeof name, 'string', 'A failure has a name')
-            assert.equal(typeof stack, 'string', 'A failure has a stack trace')
+            strictEqual(typeof message, 'string', 'A failure contains a message')
+            strictEqual(typeof name, 'string', 'A failure has a name')
+            strictEqual(typeof stack, 'string', 'A failure has a stack trace')
           } else {
-            assert.equal(aborted, false, 'A succeeded benchmark has not been aborted')
-            assert.equal(typeof hz, 'number', 'A benchmark has a frequency')
-            assert.equal(typeof stats, 'object', 'A benchmark carries stats')
+            strictEqual(aborted, false, 'A succeeded benchmark has not been aborted')
+            strictEqual(typeof hz, 'number', 'A benchmark has a frequency')
+            strictEqual(typeof stats, 'object', 'A benchmark carries stats')
             const { mean, rme } = stats
-            assert.equal(typeof mean, 'number', 'Stats contain a mean')
-            assert.equal(typeof rme, 'number', 'Stats contain a relative margin deviation')
-            assert.equal(typeof sum, 'object', 'A benchmark carries a summary')
+            strictEqual(typeof mean, 'number', 'Stats contain a mean')
+            strictEqual(typeof rme, 'number', 'Stats contain a relative margin deviation')
+            strictEqual(typeof sum, 'object', 'A benchmark carries a summary')
             const { ops, mean: mean2, rme: rme2, fastest, delta } = sum
-            assert.equal(typeof ops, 'string', 'Summary contains a count of operations per second')
+            strictEqual(typeof ops, 'string', 'Summary contains a count of operations per second')
             if (hz < 500) {
-              assert.equal(typeof mean2, 'string', 'Summary contains a mean')
+              strictEqual(typeof mean2, 'string', 'Summary contains a mean')
             }
-            assert.equal(typeof rme2, 'string', 'Summary contains mean a relative margin deviation')
+            strictEqual(typeof rme2, 'string', 'Summary contains mean a relative margin deviation')
             if (!fastest) {
-              assert.equal(typeof delta, 'string', 'Summary contains a delta to the fastest test')
+              strictEqual(typeof delta, 'string', 'Summary contains a delta to the fastest test')
             }
-            assert.equal(typeof times, 'object', 'A benchmark carries sample timings')
+            strictEqual(typeof times, 'object', 'A benchmark carries sample timings')
           }
         }
       }
@@ -91,10 +83,10 @@ addTest('returns proper results', async assert => {
       await checkFile(join(__dirname, 'output/results.html'))
       await checkFile(join(__dirname, 'performance/A suite - String#match.json'))
     })
-    .catch(error => assert.fail(error))
+    .catch(error => fail(error))
 })
 
-addTest('takes error snapshots', async assert => {
+test('takes error snapshots', async () => {
   await remove(join(__dirname, '/output/error.txt'))
   await remove(join(__dirname, '/output/error.log'))
   await remove(join(__dirname, '/output/error.png'))
@@ -108,18 +100,13 @@ addTest('takes error snapshots', async assert => {
     timeout: 5
   })
     .then(() => {
-      assert.fail({ message: 'Missing file was not reported.' })
+      fail({ message: 'Missing file was not reported.' })
     })
     .catch(async () => {
-      assert.pass('Missing file was reported.')
+      ok('Missing file was reported.')
       await checkFile(join(__dirname, '/output/error.txt'))
       await checkFile(join(__dirname, '/output/error.log'))
       await checkFile(join(__dirname, '/output/error.png'))
       await checkFile(join(__dirname, '/output/error.png'))
     })
 })
-
-if (require.main === module) {
-  require('test')
-    .run(exports)
-}

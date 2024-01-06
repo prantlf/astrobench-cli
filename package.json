@@ -32,49 +32,31 @@
     "lib"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=18"
   },
   "scripts": {
-    "lint": "eslint --fix bin/* lib/**/*.js 'test/**/*.js'",
-    "check": "nyc --silent node test/text-formatter && nyc --silent --no-clean node test/json-formatter && nyc --silent --no-clean node test/checker && nyc --silent --no-clean node test/runner && nyc --silent --no-clean ./bin/astrobench && nyc report && nyc check-coverage",
+    "postinstall": "puppeteer browsers install firefox",
+    "lint": "oxlint --fix bin/* lib/**/*.js 'test/**/*.js'",
+    "check": "rm-j -rf coverage/* && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage test/text-formatter.js && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage test/json-formatter.js && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage test/checker.js && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage test/runner.js && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage ./bin/astrobench",
     "test": "npm run lint && npm run check"
-  },
-  "nyc": {
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ],
-    "branches": 60,
-    "lines": 90,
-    "functions": 90,
-    "statements": 90
   },
   "keywords": [
     "benchmark",
     "puppeteer"
   ],
   "dependencies": {
-    "chalk": "4.1.1",
-    "commander": "8.0.0",
-    "connect": "3.7.0",
-    "fs-extra": "10.0.0",
-    "progress": "2.0.3",
-    "puppeteer": "10.1.0",
-    "serve-static": "1.14.1"
+    "colorette": "^2.0.20",
+    "commander": "^11.1.0",
+    "connect": "^3.7.0",
+    "fs-extra": "^11.2.0",
+    "puppeteer": "^21.7.0",
+    "serve-static": "^1.15.0"
   },
   "devDependencies": {
-    "@prantlf/astrobench": "1.1.0",
-    "@prantlf/jsonlint": "10.2.0",
-    "eslint": "7.30.0",
-    "eslint-config-standard": "16.0.3",
-    "eslint-plugin-import": "2.23.4",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "5.1.0",
-    "eslint-plugin-standard": "4.1.0",
-    "nyc": "15.1.0",
-    "test": "0.6.0"
-  },
-  "peerDependecies": {
-    "puppeteer-firefox": "0.5.1"
+    "@prantlf/astrobench": "^2.0.0",
+    "@prantlf/jsonlint": "^14.0.3",
+    "@unixcompat/rm.js": "^3.0.0",
+    "oxlint": "^0.1.1",
+    "test": "^3.3.0"
   }
 }

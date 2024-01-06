@@ -1,16 +1,8 @@
-/* global it */
-
+const test = require('test')
+const { ok } = require('assert')
 const format = require('../lib/formatters/text')
 
-function addTest (description, test) {
-  if (typeof describe === 'function') {
-    it(description, test)
-  } else {
-    exports[`test ${description}`] = test
-  }
-}
-
-addTest('text formatter', assert => {
+test('text formatter', () => {
   const results = require('./results.json')
   const output = format(results, { color: false })
   // eslint-disable-next-line prefer-regex-literals
@@ -21,10 +13,5 @@ B suite
   Benchmark with error failed: text is not defined
   Aborted benchmark aborted
   Deferred benchmark finished: [.,0-9]+ ops/sec [.,0-9]+ms ±[.,0-9]+% \\(fastest\\)`)
-  assert.ok(pattern.test(output), 'Formatted text matches the expected one')
+  ok(pattern.test(output), 'Formatted text matches the expected one')
 })
-
-if (require.main === module) {
-  require('test')
-    .run(exports)
-}
