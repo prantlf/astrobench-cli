@@ -35,7 +35,6 @@
     "node": ">=18"
   },
   "scripts": {
-    "postinstall": "puppeteer browsers install firefox",
     "lint": "oxlint --fix bin/* lib/**/*.js 'test/**/*.js'",
     "check": "rm-j -rf coverage/* && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage test/text-formatter.js && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage test/json-formatter.js && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage test/checker.js && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage test/runner.js && NODE_V8_COVERAGE=coverage node --test --experimental-test-coverage ./bin/astrobench",
     "test": "npm run lint && npm run check"

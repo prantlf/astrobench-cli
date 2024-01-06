@@ -25,6 +25,7 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
         cache: 'pnpm'
     - run: pnpm i --frozen-lockfile --no-verify-store-integrity
+    - run: npx puppeteer browsers install firefox
     - run: npm test
     - uses: prantlf/publish-release-action@v1
       with:

@@ -1,11 +1,8 @@
 # astrobench-cli
-[![NPM version](https://badge.fury.io/js/astrobench-cli.png)](http://badge.fury.io/js/astrobench-cli)
-[![Build Status](https://travis-ci.org/prantlf/astrobench-cli.png)](https://travis-ci.org/prantlf/astrobench-cli)
-[![codecov](https://codecov.io/gh/prantlf/astrobench-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/prantlf/astrobench-cli)
-[![Dependency Status](https://david-dm.org/prantlf/astrobench-cli.svg)](https://david-dm.org/prantlf/astrobench-cli)
-[![devDependency Status](https://david-dm.org/prantlf/astrobench-cli/dev-status.svg)](https://david-dm.org/prantlf/astrobench-cli#info=devDependencies)
 
-[![NPM Downloads](https://nodei.co/npm/astrobench-cli.png?downloads=true&stars=true)](https://www.npmjs.com/package/astrobench-cli)
+[![Latest version](https://img.shields.io/npm/v/astrobench-cli)
+ ![Dependency status](https://img.shields.io/librariesio/release/npm/astrobench-cli)
+](https://www.npmjs.com/package/astrobench-cli)
 
 Runs benchmarks on web pages written with [@prantlf/astrobench] from the command line using [Puppeteer]. If you want to generate timeline or comparison charts from the performance results, see [benchart].
 
@@ -70,7 +67,6 @@ Options:
   -S, --no-sandbox             pass `--no-sandbox` to Puppeteer
   -M, --no-shm                 pass `--disable-dev-shm-usage` to Puppeteer
   --ignore-https-errors        force page loading despite of HTTPS errors
-  -e, --executable             set the path to the browser executable
   -w, --viewport <size>        sets the default viewport (default: 1024x678)
   -a, --user-data <path>       set the user (profile) data directory
   -t, --timeout <number>       benchmark execution timeout [s] (default: 60)
@@ -146,7 +142,6 @@ Recognised options:
 * `sandbox: boolean` - pass `--no-sandbox` to Puppeteer (default: `false`)
 * `shm: boolean` - pass `--disable-dev-shm-usage` to Puppeteer (default: `false`)
 * `ignoreHTTPSErrors: boolean` - force page loading despite of HTTPS errors
-* `executable: string` - set the path to the browser executable
 * `viewport: object` - sets the default viewport (default: `{ width: 1024, height: 768 }`)
 * `userData: string` - set the user (profile) data directory
 * `timeout: string` - benchmark execution timeout [s] (default: `60`)
@@ -319,17 +314,17 @@ If you run the benchmarks in Docker (actually, [Puppeteer in Docker]), you eithe
 ```
 apk add chromium
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm ci
-astrobench -vS -x /usr/bin/chromium-browser -j results.json test.html
+PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser astrobench -vS  -j results.json test.html
 ```
 
 Or programmatically:
 
 ```js
 const run = require('astrobench-cli')
+process.env.PUPPETEER_EXECUTABLE_PATH = '/usr/bin/chromium-browser'
 const results = await run({
   url: 'test.html',
   saveJson: 'results.json',
-  executable: '/usr/bin/chromium-browser
   sandbox: false,
   verbose: true
 })
@@ -347,7 +342,7 @@ Copyright (c) 2020-2024 Ferdinand Prantl
 
 Licensed under the MIT license.
 
-[@prantlf/astrobench]: http://prantlf.github.com/astrobench/
+[@prantlf/astrobench]: https://prantlf.github.io/astrobench/
 [benchart]: http://github.com/prantlf/benchart
 [Benchmark.js]: https://benchmarkjs.com/
 [Puppeteer]: https://pptr.dev/

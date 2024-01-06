@@ -6,7 +6,7 @@ const runBenchmark = require('../lib/runner')
 const checkResults = require('../lib/checker')
 const formatToText = require('../lib/formatters/text')
 const formatToJSON = require('../lib/formatters/json')
-const { Instance: Chalk } = require('chalk')
+const { createColors } = require('colorette')
 
 commander
   .version(version)
@@ -19,7 +19,6 @@ commander
   .option('-S, --no-sandbox', 'pass --no-sandbox to Puppeteer')
   .option('-M, --no-shm', 'pass --disable-dev-shm-usage to Puppeteer')
   .option('--ignore-https-errors', 'force page loading despite of HTTPS errors')
-  .option('-e, --executable', 'set the path to the browser executable')
   .option('-w, --viewport <size>', 'sets the default viewport', '1024x678')
   .option('-a, --user-data <path>', 'set the user (profile) data directory')
   .option('-t, --timeout <number>', 'benchmark execution timeout [s]', 60, toInteger)
@@ -82,7 +81,6 @@ let {
   sandbox,
   shm,
   ignoreHttpsErrors: ignoreHTTPSErrors,
-  executable,
   viewport,
   userData,
   timeout,
@@ -140,11 +138,11 @@ function printResults (suites) {
 }
 
 function printFailedCheck ({ suite, benchmark, message }) {
-  const chalk = new Chalk(color !== false ? undefined : { level: 0 })
-  console.error(chalk.magenta('Checking results failed:'))
-  console.warn(chalk.red(`  ${message}`))
-  console.warn(chalk.yellow(`    suite: ${suite}`))
-  console.warn(chalk.cyan(`    benchmark: ${benchmark}`))
+  const { cyan, magenta, red, yellow } = createColors({ useColor: color !== false })
+  console.error(magenta('Checking results failed:'))
+  console.warn(red(`  ${message}`))
+  console.warn(yellow(`    suite: ${suite}`))
+  console.warn(cyan(`    benchmark: ${benchmark}`))
 }
 
 function handleResults (suites) {
@@ -175,9 +173,9 @@ function handleResults (suites) {
 }
 
 function printError (message) {
-  const chalk = new Chalk(color !== false ? undefined : { level: 0 })
-  console.error(chalk.magenta('Running benchmarks failed:'))
-  console.error(chalk.red(`  ${message}`))
+  const { magenta, red } = createColors({ useColor: color !== false })
+  console.error(magenta('Running benchmarks failed:'))
+  console.error(red(`  ${message}`))
 }
 
 function handleError ({ message, stack }) {
@@ -196,7 +194,6 @@ runBenchmark({
   ignoreHTTPSErrors,
   viewport,
   userData,
-  executable,
   timeout,
   color,
   verbose,
