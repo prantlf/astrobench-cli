@@ -4,6 +4,10 @@ const run = require('../lib/runner')
 const { join } = require('path')
 const { lstat, remove } = require('fs-extra')
 
+function runsOnGitHub() {
+  return !!process.env.GITHUB_ACTIONS
+}
+
 async function checkFile (path) {
   const stats = await lstat(path)
   if (!stats.isFile()) {
@@ -30,12 +34,17 @@ test('returns proper results', async () => {
   await remove(join(__dirname, 'output/results.png'))
   await remove(join(__dirname, 'output/results.html'))
   await remove(join(__dirname, 'performance/A suite - String#match.json'))
-  return run({
+  const options = {
     url: 'test/example/index.html',
     verbose: true,
     output: join(__dirname, 'output/results'),
     performance: join(__dirname, 'performance')
-  })
+  }
+  if (runsOnGitHub()) {
+    options.sandbox = false
+    options.shm = false
+  }
+  return run(options)
     .then(async suites => {
       ok(Array.isArray(suites), 'Results is an array of suites')
       for (let suiteIndex = 0; suiteIndex < suites.length; ++suiteIndex) {
@@ -92,13 +101,18 @@ test('takes error snapshots', async () => {
   await remove(join(__dirname, '/output/error.png'))
   await remove(join(__dirname, '/output/error.html'))
   const canFirefox = process.platform === 'darwin' || process.platform === 'linux'
-  return run({
+  const options = {
     browser: canFirefox ? 'firefox' : 'chrome',
     url: 'test/example/missing.html',
     verbose: true,
     errorSnapshot: join(__dirname, '/output/error'),
     timeout: 5
-  })
+  }
+  if (runsOnGitHub()) {
+    options.sandbox = false
+    options.shm = false
+  }
+  return run(options)
     .then(() => {
       fail({ message: 'Missing file was not reported.' })
     })
