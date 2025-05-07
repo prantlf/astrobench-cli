@@ -1,7 +1,7 @@
 {
   "name": "astrobench-cli",
   "description": "JavaScript benchmarks in the web browser using Benchmark.js and Puppeteer",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": {
     "name": "Ferdinand Prantl",
     "email": "prantlf@gmail.com",
