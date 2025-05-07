@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const commander = require('commander')
+const { program } = require('commander')
 const { version, description } = require('../package.json')
 const runBenchmark = require('../lib/runner')
 const checkResults = require('../lib/checker')
@@ -8,7 +8,7 @@ const formatToText = require('../lib/formatters/text')
 const formatToJSON = require('../lib/formatters/json')
 const { createColors } = require('colorette')
 
-commander
+program
   .version(version)
   .description(description)
   .usage('[options] <URL>')
@@ -68,9 +68,9 @@ function validate (condition, message) {
   }
 }
 
-const url = commander.args[0]
+const url = program.args[0]
 if (!url) {
-  commander.help()
+  program.help()
 }
 
 let {
@@ -107,7 +107,7 @@ let {
   maxRme,
   maxSem,
   maxVariance
-} = commander.opts()
+} = program.opts()
 validate(['chrome', 'firefox'].includes(browser),
   'Browser has to be either "chrome" or "firefox".')
 validate(port >= 0 && port <= 65535,
